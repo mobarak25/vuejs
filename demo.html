@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="bootstrap-4.0.css">
+	<script src="vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<div class="container">
+		<p @click="demo">click</p>
+	</div>
+</div>
+
+<script>
+
+new Vue({
+
+	el: '#app',
+
+	data: {
+		a:'ali',
+		c:'',
+
+		b:[
+			{name:'mobarak'},
+			{name:'ali'},
+			{name:'hasan'},
+			{name:'mehide'}
+		]
+	},
+	
+	methods: {
+
+		demo:function(){
+			
+			if(this.a == 'ali'){
+				var h ='';
+
+				 function ana(){
+					alert(h = 'gg')
+				}
+			}
+
+			
+		}
+	},
+
+	/*computed:{
+		demo:function(){
+			if(a == 'ali'){
+				return alert('aa');
+			}
+		}
+	}*/
+})
+
+</script>
+
+
+
+
+
+
+
+
+
+<script src="jquery.js"></script>
+<script src="bootstarap.jquery.js"></script>
+</body>
+</html>
