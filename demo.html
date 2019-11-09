@@ -4,14 +4,86 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
-	<link rel="stylesheet" href="bootstrap-4.0.css">
-	<script src="vue.js"></script>
+	<link rel="stylesheet" href="css/bootstrap-4.0.css">
+	<script src="js/vue.js"></script>
 </head>
 <body>
 
 <div id="app">
 	<div class="container">
-		<p @click="demo">click</p>
+		<hr class="mt-5">
+		<div class="row text-center pt-4 show">
+			<div class="col-md-4"><span :class=" step <= 3 ? 'pass' : ''">1</span></div>
+			<div class="col-md-4"><span :class=" step >= 2 ? 'pass' : ''">2</span></div>
+			<div class="col-md-4"><span :class=" step === 3 ? 'pass' : ''">3</span></div>
+		</div>
+
+		<div v-if="step===1" class="step-1 pt-5">
+			<div class="row">
+				<div class="col-md-6 offset-3">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="First Name" v-model="firstName">
+						<small v-if='errorMsg' class="text-danger">{{errorMsg.fname}}</small>
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Middle Name" v-model="middleName">
+						<small v-if='errorMsg' class="text-danger">{{errorMsg.mname}}</small>
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Last Name" v-model="lastName"> 
+						<small v-if='errorMsg' class="text-danger">{{errorMsg.lname}}</small>
+					</div>
+					<div class="form-group text-right">
+						<button @click="steps" class="btn btn-primary">Go next Step</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div v-if="step===2" class="step-2 pt-5">
+			<div class="row">
+				<div class="col-md-6 offset-3">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Email Address">
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Contac Number">
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Emergency Contact Number">
+					</div>
+					<div class="form-group text-right">
+						<button @click="back" class="btn btn-primary">Back Prev</button>
+						<button @click="steps" class="btn btn-primary">Go next Step</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div v-if="step===3" class="step-3 pt-5">
+			<div class="row">
+				<div class="col-md-6 offset-3">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Password">
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Confirm Password">
+					</div>
+
+					<div class="form-group text-right">
+						<button @click="back" class="btn btn-primary">Back Prev</button>
+						<button class="btn btn-primary">Sumit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="mt-5">
 	</div>
 </div>
 
@@ -22,53 +94,68 @@ new Vue({
 	el: '#app',
 
 	data: {
-		a:'ali',
-		c:'',
+		step:1,
+		className:'pass',
 
-		b:[
-			{name:'mobarak'},
-			{name:'ali'},
-			{name:'hasan'},
-			{name:'mehide'}
-		]
+		firstName:'',
+		middleName:'',
+		lastName:'',
+		
+
+		errorMsg:[],
+
+		
+
 	},
 	
-	methods: {
-
-		demo:function(){
-			
-			if(this.a == 'ali'){
-				var h ='';
-
-				 function ana(){
-					alert(h = 'gg')
-				}
+	methods:{
+		steps: function(){
+			if(this.firstName ==''){
+				this.errorMsg['fname'] = 'Please fill First Name';
+				return false;
+			}else if (this.middleName=='') {
+				this.errorMsg['mname'] = 'Please fill Middle Name';
+				return false;
+			}else if (this.lastName=='') {
+				this.errorMsg['lname'] = 'Please fill Last Name';
+				return false;
+			}else{
+				this.step++;
+				
 			}
-
 			
-		}
+		},
+		back: function(){
+			this.step--;
+		},
+		
 	},
-
-	/*computed:{
-		demo:function(){
-			if(a == 'ali'){
-				return alert('aa');
-			}
-		}
-	}*/
+	
 })
 
 </script>
 
 
+<style>
+	.show span{
+		font-size: 30px;
+		display: block;
+		border-bottom: 2px solid #ddd;
+
+	}
+	.show span.pass{
+
+		border-color:#006400;
+
+	}
+</style>
 
 
 
 
 
 
-
-<script src="jquery.js"></script>
-<script src="bootstarap.jquery.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/bootstarap.jquery.js"></script>
 </body>
 </html>
