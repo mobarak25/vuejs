@@ -13,9 +13,9 @@
 	<div class="container">
 		<hr class="mt-5">
 		<div class="row text-center pt-4 show">
-			<div class="col-md-4"><span :class=" step <= 3 ? 'pass' : ''">1</span></div>
-			<div class="col-md-4"><span :class=" step >= 2 ? 'pass' : ''">2</span></div>
-			<div class="col-md-4"><span :class=" step === 3 ? 'pass' : ''">3</span></div>
+			<div class="col-md-4"><span :class="step <= 3?  'pass' : ''">1</span></div>
+			<div class="col-md-4"><span :class="step >= 2 ? 'pass' : ''">2</span></div>
+			<div class="col-md-4"><span :class="step === 3 ? 'pass' : ''">3</span></div>
 		</div>
 
 		<div v-if="step===1" class="step-1 pt-5">
@@ -23,7 +23,7 @@
 				<div class="col-md-6 offset-3">
 					<div class="form-group">
 						<input class="form-control" type="text" placeholder="First Name" v-model="firstName">
-						<small v-if='errorMsg' class="text-danger">{{errorMsg.fname}}</small>
+						<small v-if='errorMsg.fname' class="text-danger">{{errorMsg.fname}}</small>
 					</div>
 
 					<div class="form-group">
@@ -95,14 +95,17 @@ new Vue({
 
 	data: {
 		step:1,
-		className:'pass',
 
 		firstName:'',
 		middleName:'',
 		lastName:'',
 		
 
-		errorMsg:[],
+		errorMsg:{
+			fname:"",
+			mname:"",
+			lname:""
+		}
 
 		
 
@@ -111,17 +114,13 @@ new Vue({
 	methods:{
 		steps: function(){
 			if(this.firstName ==''){
-				this.errorMsg['fname'] = 'Please fill First Name';
-				return false;
+				this.errorMsg.fname = 'Please fill First Name';
 			}else if (this.middleName=='') {
-				this.errorMsg['mname'] = 'Please fill Middle Name';
-				return false;
+				this.errorMsg.mname = 'Please fill Middle Name';
 			}else if (this.lastName=='') {
-				this.errorMsg['lname'] = 'Please fill Last Name';
-				return false;
+				this.errorMsg.lname= 'Please fill Last Name';
 			}else{
 				this.step++;
-				
 			}
 			
 		},
