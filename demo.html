@@ -19,22 +19,24 @@
 		</div>
 
 		<div v-if="step===1" class="step-1 pt-5">
-			<div class="row">
+			<div class="row" v-for="collect in collects">
 				<div class="col-md-6 offset-3">
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="First Name" v-model="firstName">
-						<small v-if='errorMsg.fname' class="text-danger">{{errorMsg.fname}}</small>
+						<input class="form-control" type="text" placeholder="First Name" v-model="collect.firstName">
+						<p v-for="error in errors">{{error.fname}}</p>
+						
 					</div>
 
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Middle Name" v-model="middleName">
-						<small v-if='errorMsg' class="text-danger">{{errorMsg.mname}}</small>
+						<input class="form-control" type="text" placeholder="Middle Name" v-model="collect.middleName">
+						<p v-for="error in errors">{{error.mname}}</p>
 					</div>
 
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Last Name" v-model="lastName"> 
-						<small v-if='errorMsg' class="text-danger">{{errorMsg.lname}}</small>
+						<input class="form-control" type="text" placeholder="Last Name" v-model="collect.lastName">
+						<p v-for="error in errors">{{error.lname}}</p> 
 					</div>
+
 					<div class="form-group text-right">
 						<button @click="steps" class="btn btn-primary">Go next Step</button>
 					</div>
@@ -93,37 +95,37 @@ new Vue({
 
 	el: '#app',
 
-	data: {
+	data:{
 		step:1,
 
-		firstName:'',
-		middleName:'',
-		lastName:'',
-		
+		collects:[
+			{firstName:'',middleName:'',lastName:''},
+		],
 
-		errorMsg:{
-			fname:"",
-			mname:"",
-			lname:""
-		}
 
-		
+		errors:[],
 
 	},
 	
 	methods:{
 		steps: function(){
-			if(this.firstName ==''){
-				this.errorMsg.fname = 'Please fill First Name';
-			}else if (this.middleName=='') {
-				this.errorMsg.mname = 'Please fill Middle Name';
-			}else if (this.lastName=='') {
-				this.errorMsg.lname= 'Please fill Last Name';
-			}else{
-				this.step++;
-			}
+			this.collects.forEach(val=>{
+				if(val.firstName=='' || val.middleName=='' || val.lastName){
+					this.errors.push({
+						fname:'Please fill First name',
+						mname:'Please fill Middle name',
+						lname:'Please fill Last name',
+					});
+					return false;
+				}else{
+					this.step++;
+				}
+
+			});
+			
 			
 		},
+
 		back: function(){
 			this.step--;
 		},
