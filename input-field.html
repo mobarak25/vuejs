@@ -22,7 +22,7 @@
 			<div class="row">
 				<div class="col-md-6 offset-3">
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="First Name" v-model="collects.firstName">
+						<input class="form-control" type="text" placeholder="First Name" v-model="collects.firstName" data-name="first_name" @keyup="gg">
 						<small class="text-danger">{{errors.firstName}}</small>
 					</div>
 
@@ -102,35 +102,34 @@ new Vue({
             lastName:'',
             email:'',
             contact:'',
-            lastName:'',
+            econtact:'',
         },
         errors:false,
     },
 
     methods:{
+    	gg:function(){
+    		console.log('data-name');
+    	},
 
         isValid:function(){
-            var errorObj={};
-
-            Object.keys(this.collects).forEach( (element, index) =>{
-                if(!this.collects[element]){
-                    errorObj[element] = element +' can not be empty.';
-                };
-            });
-
-            if (Object.keys(errorObj).length) {
-                return errorObj;
-            }else{
-               return false; 
-            }            
+        	                        
         },
-        steps: function(param){
-            this.errors=this.isValid();
+
+        steps: function(event){
+
+        	var id = target.getAttribute('data-name');
+
+        	alert(id);
+
+            /*this.errors=this.isValid();
             if(!this.errors){
                 this.step=parseInt(param);
             }else{
                 return false;
-            }
+            }*/
+
+            //this.step=parseInt(param);
         },
         back: function(param){
             this.step=parseInt(param);
