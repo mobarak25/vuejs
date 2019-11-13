@@ -22,17 +22,17 @@
 			<div class="row">
 				<div class="col-md-6 offset-3">
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="First Name" v-model="collects.firstName">
+						<input class="form-control" type="text" placeholder="First Name" v-model="collects.firstName" ref="firstName">
 						<small class="text-danger">{{errors.firstName}}</small>
 					</div>
 
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Middle Name" v-model="collects.middleName">
+						<input class="form-control" type="text" placeholder="Middle Name" v-model="collects.middleName" ref="middleName">
 						<small class="text-danger">{{errors.middleName}}</small>
 					</div>
 
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Last Name" v-model="collects.lastName">
+						<input class="form-control" type="text" placeholder="Last Name" v-model="collects.lastName" ref="lastName">
 						<small class="text-danger">{{errors.lastName}}</small>
 					</div>
 
@@ -47,15 +47,18 @@
 			<div class="row">
 				<div class="col-md-6 offset-3">
 					<div class="form-group">
-						<input v-model="collects.email" class="form-control" type="text" placeholder="Email Address">
+						<input v-model="collects.email" class="form-control" type="text" placeholder="Email Address" ref="email">
+						<small class="text-danger">{{errors.email}}</small>
 					</div>
 
 					<div class="form-group">
-						<input v-model="collects.contact" class="form-control" type="text" placeholder="Contac Number">
+						<input v-model="collects.contact" class="form-control" type="text" placeholder="Contac Number" ref="contact">
+						<small class="text-danger">{{errors.contact}}</small>
 					</div>
 
 					<div class="form-group">
-						<input v-model="collects.econtact" class="form-control" type="text" placeholder="Emergency Contact Number">
+						<input v-model="collects.econtact" class="form-control" type="text" placeholder="Emergency Contact Number" ref="econtact">
+						<small class="text-danger">{{errors.econtact}}</small>
 					</div>
 					<div class="form-group text-right">
 						<button @click="back(1)" class="btn btn-primary">Back Prev</button>
@@ -96,14 +99,7 @@ new Vue({
 
     data:{
         step:1,
-        collects:{
-            firstName:'',
-            middleName:'',
-            lastName:'',
-            email:'',
-            contact:'',
-            lastName:'',
-        },
+        collects:{},
         errors:false,
     },
 
@@ -117,7 +113,6 @@ new Vue({
                     errorObj[element] = element +' can not be empty.';
                 };
             });
-
             if (Object.keys(errorObj).length) {
                 return errorObj;
             }else{
@@ -126,16 +121,35 @@ new Vue({
         },
         steps: function(param){
             this.errors=this.isValid();
-            if(!this.errors){
-                this.step=parseInt(param);
+
+            if(Object.keys(this.errors).length){
+            	return false;
             }else{
-                return false;
+                this.step=parseInt(param);                               
             }
         },
         back: function(param){
             this.step=parseInt(param);
         },
+        modelFilup(){
+        	console.log(Object.keys(this.$refs));
+        	var x={};
+        	this.collects={};  	
+	    	Object.keys(this.$refs).forEach((element)=> {
+	    		x[element]=''; 		
+	    	});
+	    	this.collects=x;
+	    	console.log(this.collects);
+        }
     },
+    mounted(){
+    	this.modelFilup();
+    },
+    watch:{
+    	step:function(n,o){
+    		this.modelFilup();
+    	}
+    }
 })
 
 </script>

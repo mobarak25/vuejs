@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>vue js</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4 p-4">
+				<div class="row">
+					<div class="col-6">
+						<input v-model="search" @keyUP="searcByText" class="form-control" type="text">
+					</div>
+
+					<div class="col-6">
+						<select v-model="type" @change="searcByText" class="form-control">
+							<option value="">Please select one</option>
+							<option>Fruit</option>
+							<option>Cloth</option>
+						</select>
+						<span>Selected: {{ type }}</span>
+					</div>
+					
+				</div>
+				
+				<hr>
+				<ul class="list-group">
+					<li v-for="item in filteredList" class="list-group-item">{{item.name}}</li>
+				</ul>
+
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+new Vue ({
+	el: '#app',
+	data: {
+		items: [
+			{name:'Apple',   category:'Fruit', price:3.5},
+			{name:'Orange',  category:'Fruit', price:3.5},
+			{name:'Banana',  category:'Fruit', price:1},
+			{name:'Pinaple', category:'Fruit', price:1},
+			{name:'Shirt',   category:'Cloth', price:1},
+			{name:'Pant',    category:'Cloth', price:1},
+			{name:'T-shirt', category:'Cloth', price:1},
+			{name:'Panjabe', category:'Cloth',price:1},
+		],
+		search: '',
+		type:'',
+		filteredList:[],
+	},
+
+	methods:{
+		searcByText(){		
+
+			if (this.type && this.search) {
+				this.filteredList=this.items.filter(post => {
+					return post.name.toLowerCase().includes(this.search.toLowerCase()) && post.category.toLowerCase().includes(this.type.toLowerCase());
+				});
+			}else if(!this.type && this.search){
+				this.filteredList=this.items.filter(post => {
+					return post.name.toLowerCase().includes(this.search.toLowerCase());
+				});
+			}else if(this.type && !this.search){
+				this.filteredList=this.items.filter(post => {
+					return post.category.toLowerCase().includes(this.type.toLowerCase());
+				});
+			}else{
+				this.filteredList=this.items;
+			}
+		}
+	},
+
+	mounted(){
+		this.filteredList=this.items;
+	},
+})
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

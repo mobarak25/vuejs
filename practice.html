@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/bootstrap-4.0.css">
+	<script src="js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<div class="container">
+		<form>
+			<input type="text" v-model="collects.firstName" ref="firstName">
+			<input type="text" v-model="collects.middleName" ref="middleName">
+			<input type="text" v-model="collects.lastName" ref="lastName">
+			<button type="submi" @click.prevent="get">Submit</button>
+		</form>
+	</div>
+</div>
+
+<script>
+
+new Vue({
+
+    el: '#app',
+    data:{
+    	collects:{},
+	    errors:{},        
+    },
+
+    methods:{
+    	get: function(){
+    		var errorObj={};
+    		Object.keys(this.collects).forEach((element)=>{
+
+    			if(!this.collects[element]){
+                    errorObj[element] = element +' can not be empty.';
+                };
+    		});
+
+    		this.errors = errorObj; 
+    	}
+    },
+
+    mounted(){
+
+    	var x = {};  	
+    	Object.keys(this.$refs).forEach((element)=> {
+    		x[element]='';
+    	});
+    	this.collects=x;
+    },
+})
+
+</script>
+
+
+<style>
+    
+</style>
+
+
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstarap.jquery.js"></script>
+</body>
+</html>
