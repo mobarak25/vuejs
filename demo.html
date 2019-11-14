@@ -100,17 +100,23 @@ new Vue({
     data:{
         step:1,
         collects:{},
-        errors:false,
+        errors:{},
     },
 
     methods:{
+    	camelCaseToSpaceCase:function(getval){
+    		return getval.replace(/([A-Z])/g, ' $1').toLowerCase().replace(/^\w/, c => c.toUpperCase());
+
+    	},
+
 
         isValid:function(){
             var errorObj={};
 
             Object.keys(this.collects).forEach( (element, index) =>{
                 if(!this.collects[element]){
-                    errorObj[element] = element +' can not be empty.';
+                	var customName = this.camelCaseToSpaceCase(element);
+                    errorObj[element] = customName +' can not be empty.';
                 };
             });
             if (Object.keys(errorObj).length) {
