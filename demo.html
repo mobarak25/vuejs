@@ -17,28 +17,27 @@
 			<div class="col-md-4"><span :class="step >= 2 ? 'pass' : ''">2</span></div>
 			<div class="col-md-4"><span :class="step === 3 ? 'pass' : ''">3</span></div>
 		</div>
-
+    
 		<div v-if="step===1" class="step-1 pt-5">
-			<div class="row" v-for="collect in collects">
+			<div class="row">
 				<div class="col-md-6 offset-3">
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="First Name" v-model="collect.firstName">
-						<p v-for="error in errors">{{error.fname}}</p>
-						
+						<input class="form-control" type="text" placeholder="First Name" v-model="collects.firstName" ref="firstName">
+						<small class="text-danger">{{errors.firstName}}</small>
 					</div>
 
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Middle Name" v-model="collect.middleName">
-						<p v-for="error in errors">{{error.mname}}</p>
+						<input class="form-control" type="text" placeholder="Middle Name" v-model="collects.middleName" ref="middleName">
+						<small class="text-danger">{{errors.middleName}}</small>
 					</div>
 
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Last Name" v-model="collect.lastName">
-						<p v-for="error in errors">{{error.lname}}</p> 
+						<input class="form-control" type="text" placeholder="Last Name" v-model="collects.lastName" ref="lastName">
+						<small class="text-danger">{{errors.lastName}}</small>
 					</div>
 
 					<div class="form-group text-right">
-						<button @click="steps" class="btn btn-primary">Go next Step</button>
+						<button @click="steps(2)" class="btn btn-primary">Go next Step</button>
 					</div>
 				</div>
 			</div>
@@ -48,19 +47,22 @@
 			<div class="row">
 				<div class="col-md-6 offset-3">
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Email Address">
+						<input v-model="collects.email" class="form-control" type="text" placeholder="Email Address" ref="email">
+						<small class="text-danger">{{errors.email}}</small>
 					</div>
 
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Contac Number">
+						<input v-model="collects.contact" class="form-control" type="text" placeholder="Contac Number" ref="contact">
+						<small class="text-danger">{{errors.contact}}</small>
 					</div>
 
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Emergency Contact Number">
+						<input v-model="collects.econtact" class="form-control" type="text" placeholder="Emergency Contact Number" ref="econtact">
+						<small class="text-danger">{{errors.econtact}}</small>
 					</div>
 					<div class="form-group text-right">
-						<button @click="back" class="btn btn-primary">Back Prev</button>
-						<button @click="steps" class="btn btn-primary">Go next Step</button>
+						<button @click="back(1)" class="btn btn-primary">Back Prev</button>
+						<button @click="steps(3)" class="btn btn-primary">Go next Step</button>
 					</div>
 				</div>
 			</div>
@@ -78,7 +80,7 @@
 					</div>
 
 					<div class="form-group text-right">
-						<button @click="back" class="btn btn-primary">Back Prev</button>
+						<button @click="back(2)" class="btn btn-primary">Back Prev</button>
 						<button class="btn btn-primary">Sumit</button>
 					</div>
 				</div>
@@ -93,62 +95,81 @@
 
 new Vue({
 
-	el: '#app',
+    el: '#app',
 
-	data:{
-		step:1,
+    data:{
+        step:1,
+        collects:{},
+        errors:{},
+    },
 
-		collects:[
-			{firstName:'',middleName:'',lastName:''},
-		],
+    methods:{
+    	camelCaseToSpaceCase:function(getval){
+    		return getval.replace(/([A-Z])/g, ' $1').toLowerCase().replace(/^\w/, c => c.toUpperCase());
+
+    	},
 
 
-		errors:[],
+        isValid:function(){
+            var errorObj={};
 
-	},
-	
-	methods:{
-		steps: function(){
-			this.collects.forEach(val=>{
-				if(val.firstName=='' || val.middleName=='' || val.lastName){
-					this.errors.push({
-						fname:'Please fill First name',
-						mname:'Please fill Middle name',
-						lname:'Please fill Last name',
-					});
-					return false;
-				}else{
-					this.step++;
-				}
+            Object.keys(this.collects).forEach( (element, index) =>{
+                if(!this.collects[element]){
+                	var customName = this.camelCaseToSpaceCase(element);
+                    errorObj[element] = customName +' can not be empty.';
+                };
+            });
+            if (Object.keys(errorObj).length) {
+                return errorObj;
+            }else{
+               return false; 
+            }            
+        },
+        steps: function(param){
+            this.errors=this.isValid();
 
-			});
-			
-			
-		},
-
-		back: function(){
-			this.step--;
-		},
-		
-	},
-	
+            if(Object.keys(this.errors).length){
+            	return false;
+            }else{
+                this.step=parseInt(param);                               
+            }
+        },
+        back: function(param){
+            this.step=parseInt(param);
+        },
+        modelFilup(){
+        	console.log(Object.keys(this.$refs));
+        	var x={};
+        	this.collects={};  	
+	    	Object.keys(this.$refs).forEach((element)=> {
+	    		x[element]=''; 		
+	    	});
+	    	this.collects=x;
+	    	console.log(this.collects);
+        }
+    },
+    mounted(){
+    	this.modelFilup();
+    },
+    watch:{
+    	step:function(n,o){
+    		this.modelFilup();
+    	}
+    }
 })
 
 </script>
 
 
 <style>
-	.show span{
-		font-size: 30px;
-		display: block;
-		border-bottom: 2px solid #ddd;
-
-	}
-	.show span.pass{
-
-		border-color:#006400;
-
-	}
+    .show span{
+    	font-size: 30px;
+    	display: block;
+    	border-bottom: 2px solid #ddd;
+    }
+    .show span.pass{
+    	border-color:#006400;
+    }
 </style>
 
 

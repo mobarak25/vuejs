@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/bootstrap-4.0.css">
+	<script src="js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<div class="container">
+		<div class="row">
+			<form class="col-6 pt-5">
+				<div class="form-group">
+					<input class="form-control" type="text" v-model="collects.firstName" name="firstName" ref="firstName" data-check="yes" data-length = "12" data-firstchar ="a">
+					<small class="text-danger">{{errors.firstName}}</small>
+				</div>
+
+				<div class="form-group">
+					<input class="form-control" type="text" v-model="collects.middleName" ref="middleName" data-check="yes">
+					<small class="text-danger">{{errors.middleName}}</small>
+				</div>
+
+				<div class="form-group">
+					<input class="form-control" type="text" v-model="collects.lastNameAli" ref="lastNameAli" data-check="no">
+					<small class="text-danger">{{errors.lastNameAli}}</small>
+				</div>
+				
+				<button type="submi" @click.prevent="get" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+
+new Vue({
+
+    el: '#app',
+    data:{
+    	collects:{},
+	    errors:{},        
+    },
+
+    methods:{
+
+    	camelCaseToSpaceCase:function(getval){
+    		return getval.replace(/([A-Z])/g, ' $1').toLowerCase().replace(/^\w/, c => c.toUpperCase());
+
+    	},
+
+    	
+
+    	get: function(event){
+    		
+			var refs = this.$refs;
+			var inputs = event.target.form;
+
+    		var errorObj={};
+    		Object.keys(this.collects).forEach((element)=>{
+    			var validates = refs[element].dataset;
+				debugger;
+    			var isCheck = validates.check;
+    			var length = validates.length === undefined ? 0: parseInt(validates.length);
+    			
+    			if(!this.collects[element] && isCheck == 'yes'){
+    				var eleName = this.camelCaseToSpaceCase(element);
+    				var msg = eleName +' can not be empty.';
+    				errorObj[element]= msg;
+                };
+
+                if(this.collects[element] && this.collects[element].length < length){
+    				var eleName = this.camelCaseToSpaceCase(element);
+    				var msg = eleName +' must be 12 character long.';
+    				errorObj[element]= msg;
+                };
+
+                
+    		});
+
+    		this.errors = errorObj; 
+    	}
+    },
+
+    mounted(){
+
+    	var x = {};  	
+    	Object.keys(this.$refs).forEach((element)=> {
+    		x[element]='';
+    	});
+    	this.collects=x;
+    },
+})
+
+</script>
+
+
+<style>
+    
+</style>
+
+
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstarap.jquery.js"></script>
+</body>
+</html>
