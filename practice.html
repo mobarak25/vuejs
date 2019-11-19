@@ -14,7 +14,7 @@
 		<div class="row">
 			<form class="col-6 pt-5">
 				<div class="form-group">
-					<input class="form-control" type="text" v-model="collects.firstName" name="firstName" ref="firstName" data-check="yes" data-length = "12" data-firstchar ="a">
+					<input class="form-control" type="text" v-model="collects.firstName" name="firstName" ref="firstName" data-check="yes" data-length = "12">
 					<small class="text-danger">{{errors.firstName}}</small>
 				</div>
 
@@ -48,20 +48,16 @@ new Vue({
 
     	camelCaseToSpaceCase:function(getval){
     		return getval.replace(/([A-Z])/g, ' $1').toLowerCase().replace(/^\w/, c => c.toUpperCase());
-
     	},
-
-    	
 
     	get: function(event){
     		
 			var refs = this.$refs;
-			var inputs = event.target.form;
 
     		var errorObj={};
+
     		Object.keys(this.collects).forEach((element)=>{
     			var validates = refs[element].dataset;
-				debugger;
     			var isCheck = validates.check;
     			var length = validates.length === undefined ? 0: parseInt(validates.length);
     			
@@ -92,6 +88,15 @@ new Vue({
     	});
     	this.collects=x;
     },
+
+   watch:{
+    errors:function(val,newV){
+        console.log(val);
+        console.log(newV);
+
+
+    }
+   },
 })
 
 </script>
