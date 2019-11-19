@@ -56,12 +56,9 @@ new Vue({
     	get: function(event){
     		
 			var refs = this.$refs;
-			var inputs = event.target.form;
-
     		var errorObj={};
     		Object.keys(this.collects).forEach((element)=>{
     			var validates = refs[element].dataset;
-				debugger;
     			var isCheck = validates.check;
     			var length = validates.length === undefined ? 0: parseInt(validates.length);
     			
