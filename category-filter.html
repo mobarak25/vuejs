@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="bootstrap-4.0.css">
+	<script src="vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<div class="container">
+		<div>
+			<select v-model="selected_type">
+				<option  value="radio">Radio</option>
+				<option checked="true" value="checkbox" selected>Check Box</option>
+			</select>
+			{{selected_type}}
+		</div>
+		
+
+		<div class="form-check form-check-inline" v-for="main_content in main_contents">
+			<label>
+				<input type="checkbox" v-model="get_main_cat_val" :value="main_content.id"> {{main_content.title}}
+			</label>
+		</div>
+		
+{{filteredPositions}}
+		
+		
+	</div>
+</div>
+
+
+<script>
+
+new Vue({
+
+	el: '#app',
+	data:{
+		selected_type:'checkbox',
+		get_main_cat_val:[],
+
+
+		main_contents:[
+			{'id':1,'title':'woman'},
+			{'id':2,'title':'man'},
+			{'id':3,'title':'kid'}
+		],
+
+		second_content:[
+			{'id':1,'content_id':1,'title':'dress for 1'},
+			{'id':2,'content_id':1,'title':'dress for 1'},
+			{'id':3,'content_id':2,'title':'dress for 2'},
+			{'id':4,'content_id':2,'title':'dress for 2'},
+			{'id':5,'content_id':3,'title':'dress for 3'}
+		],
+
+		show_second:[],		
+	},
+
+	computed: {
+	    /*filteredPositions () {
+	        return this.second_content.filter(position => this.get_main_cat_val.includes(position.content_id));
+	    }*/
+
+	    filteredSecondCat:function(){
+	    	this.second_content.filter(element=>{
+	    		
+	    	})
+	    }
+	}
+
+	
+
+})
+
+</script>
+
+<style>
+	
+</style>
+
+
+<script src="jquery.js"></script>
+<script src="bootstarap.jquery.js"></script>
+</body>
+</html>
