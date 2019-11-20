@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/bootstrap-4.0.css">
+	<script src="js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<div class="container">
+
+		<div>
+			<select v-model="selected_type">
+				<option  value="radio">Radio</option>
+				<option checked="true" value="checkbox" selected>Check Box</option>
+			</select>
+			{{selected_type}}
+		</div>
+
+		<div class="form-check form-check-inline" v-for="main_content in main_contents">
+			<label>
+				<input :type="selected_type ==='checkbox'?'checkbox':'radio'" v-model="$data[selected_type=='checkbox' ? 'get_main_cat_val' : 'get_main_cat_val_radio']" :value="main_content.id"> {{main_content.title}}
+			</label>
+		</div>
+
+		<div>
+			<div class="form-check form-check-inline" v-for="filteredSecondCat in filteredSecondCats">
+				<label>
+					<input :type="selected_type ==='checkbox'?'checkbox':'radio'" v-model="$data[selected_type=='checkbox' ? 'get_second_cat_val' : 'get_second_cat_val_radio']" :value="filteredSecondCat.id">{{filteredSecondCat.title}}
+				</label>
+			</div>
+		</div>
+		<div>
+			<div class="form-check form-check-inline" v-for="filteredThirdCat in filteredThirdCats">{{filteredThirdCat.title}}</div>
+		</div>
+
+	</div>
+</div>
+
+
+<script>
+
+new Vue({
+
+	el: '#app',
+	data:{
+		selected_type:'checkbox',
+		get_main_cat_val:[],
+		get_main_cat_val_radio:'',
+
+		get_second_cat_val:[],
+		get_second_cat_val_radio:'',
+
+
+		main_contents:[
+			{'id':1,'title':'woman'},
+			{'id':2,'title':'man'},
+			{'id':3,'title':'kid'}
+		],
+
+		second_content:[
+			{'id':1,'content_id':1,'title':'Culotte dress'},
+			{'id':2,'content_id':1,'title':'Babydoll dress'},
+			{'id':3,'content_id':2,'title':'Sweater'},
+			{'id':4,'content_id':2,'title':'Shirt'},
+			{'id':5,'content_id':3,'title':'Baby apron'}
+		],
+
+		third_content:[
+			{'id':1,'nested_id':1,'title':'Wrap around dress.'},
+			{'id':2,'nested_id':1,'title':'Kimono dress'},
+			{'id':3,'nested_id':1,'title':'Bubble dress.'},
+
+			{'id':4,'nested_id':2,'title':'Tutu dress.'},
+			{'id':5,'nested_id':2,'title':'Polo dress.'},
+			{'id':6,'nested_id':2,'title':'Shirtdress.'},
+
+			{'id':7,'nested_id':3,'title':'Round Colur Sweater'},
+			{'id':8,'nested_id':3,'title':'Colurless Sweater'},
+			{'id':9,'nested_id':3,'title':'Gloves Sweater'},
+
+			{'id':10,'nested_id':4,'title':'Jeans Shirt'},
+			{'id':11,'nested_id':4,'title':'Hawaiian shirt.'},
+			{'id':12,'nested_id':4,'title':'Singlet Shirt'},
+
+			{'id':13,'nested_id':5,'title':'Socks'},
+			{'id':14,'nested_id':5,'title':'Singlet Shirt'},
+			{'id':25,'nested_id':5,'title':'Singlet Shirt'},
+		],
+
+	},
+
+	
+
+	computed: {
+
+	    filteredSecondCats:function(){
+	    	if(this.selected_type=="checkbox"){
+	    		this.get_second_cat_val=[];
+		    	return this.second_content.filter(element=>{
+
+		    		return  this.get_main_cat_val.includes(element.content_id);
+		    	})
+	    	}else{
+	    		this.get_second_cat_val_radio='';
+	    		return this.second_content.filter(element=>{
+
+		    		return element.content_id === this.get_main_cat_val_radio;
+		    	})
+	    	}
+	    },
+
+	    filteredThirdCats:function(){
+	    	if(this.selected_type=="checkbox" && this.get_main_cat_val.length>0){
+		    	return this.third_content.filter(element=>{
+
+		    		return  this.get_second_cat_val.includes(element.nested_id);
+		    	})
+	    	}else{
+	    		return this.third_content.filter(element=>{
+
+		    		return element.nested_id === this.get_second_cat_val_radio;
+		    	})
+	    	}
+	    },
+	}
+
+	
+
+})
+
+</script>
+
+<style>
+	
+</style>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstarap.jquery.js"></script>
+</body>
+</html>
