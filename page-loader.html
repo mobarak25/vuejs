@@ -8,37 +8,49 @@
 	<script src="js/vue.js"></script>
 </head>
 <body>
-
-<div id="app">
-	<div class="container">
-
-		Hourse:{{ hours }} Minutes {{ minutes }}:{{ counter }}
-		<button @click="startTimer">Click Strat</button>
-
-	</div>
+<div id="app" class="col-sm-12">
+	<P>{{points}}</P>
 </div>
+
+
+
 
 
 <script>
 
 new Vue({
-
-	el: '#app',
-	data:{
-		counter:60,
-		minutes:0,
-		hours:0,
-	},
-	methods:{
-		startTimer:function(){
-			setInterval(this.decrementor,1000);
+	el: "#app",
+	data () {
+		return {
+			counter:0,
+			points:[40, 100, 1, 5, 25, 10],		
 		}
 	},
-	watch:{
-		
-	}
 
+	methods:{
+		/*inc:function(){
+			if(this.counter<30){
+				this.counter++;
+			}
+		},*/
+
+		compaire:function(a){
+			console.log(a+'+New');
+		}
+
+
+		
+	},
+	mounted(){
+		
+		this.points.sort(this.compaire);
+		
+	},
+	watch: {
+		
+	},
 })
+
 
 </script>
 

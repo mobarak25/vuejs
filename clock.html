@@ -11,9 +11,7 @@
 
 <div id="app">
 	<div class="container">
-
-		Hourse:{{ hours }} Minutes {{ minutes }}:{{ counter }}
-		<button @click="startTimer">Click Strat</button>
+		<h3>{{timeg()}}</h3>
 
 	</div>
 </div>
@@ -21,36 +19,24 @@
 
 <script>
 
+	"use strict"
+
 new Vue({
 
 	el: '#app',
 	data:{
-		counter:60,
-		minutes:0,
-		hours:0,
+		timeg:'',
 	},
-	methods:{
-		decrementor: function(){
-			this.counter--;
-			if(this.counter<0){
-				this.counter=60;
-				this.minutes+=1;
-			};
-			if(this.minutes==60){
-				this.hours+=1;
-				this.minutes=0;
-			}
-		},
-		
-
-
-		startTimer:function(){
-			setInterval(this.decrementor,1000);
+	created(){
+		this.timeg=function() {
+			return new Date().toLocaleTimeString();
 		}
-
 	},
-	watch:{
+	methods:{		
 		
+	},
+	mounted(){		
+		setInterval(this.timeg, 1000);
 	}
 
 })
