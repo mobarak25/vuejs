@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<link rel="stylesheet" href="css/bootstrap-4.0.css">
+<script src="js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<div class="container">
+		<!-- <h3>{{timeg()}}</h3> -->
+
+	</div>
+</div>
+
+
+<script>
+
+	"use strict"
+ 
+	function add(a, callback){ 
+		var vel = a;
+		for(var i=1;i<vel; i++){
+			document.write(i+'<br>'); 	
+		}
+		callback(vel);
+		
+	}
+
+	function dis(b){
+		for(var i=b;i>0; i--){
+			document.write(i+'<br>'); 	
+		} 
+	}
+
+	add(10,dis); 
+
+</script>
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstarap.jquery.js"></script>
+</body>
+</html>

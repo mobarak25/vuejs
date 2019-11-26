@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<link rel="stylesheet" href="css/bootstrap-4.0.css">
+<script src="js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<div class="container pt-5">
+		<div class="row">
+			<div class="col-3">
+				<div class="form-group">
+					<input v-model="bangla" type="text" class="form-control" placeholder="Bangla">
+				</div>
+
+				<div class="form-group">
+					<input v-model="english" type="text" class="form-control" placeholder="English">
+				</div>
+
+				<div class="form-group">
+					<input v-model="math" type="text" class="form-control" placeholder="Math">
+				</div>
+
+				<div class="form-group">
+					<input v-model="science" type="text" class="form-control" placeholder="Science">
+				</div>
+				<div class="form-group">
+					<p> {{ result }} </p>
+					<button @click="checkPass" class="btn btn-success">Submit</button>
+
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	"use strict"
+
+	new Vue({
+		el: '#app',
+
+		data: {
+			bangla:'',
+			english:'',
+			math:'',
+			science:'',
+
+			result:'',
+		},
+
+		methods:{
+
+			checkPass:function(){
+				let bn = parseInt(this.bangla);
+				let en = parseInt(this.english);
+				let mth = parseInt(this.math);
+				let snc = parseInt(this.science);
+
+				let total = bn + en + mth + snc;
+				let present = total / 4;
+
+				
+				
+				
+				
+				if(bn >= 40 && en >= 40 && mth >= 40 && snc >= 40){
+					
+					this.result = "Total " + total + " Presentage is " + present +'%' + " You Pass";
+
+				}else if(bn < 40 || en < 40 || mth < 40 || snc < 40){
+					this.result = "Total " + total + " Presentage is " + present +'%' + " You Fail!";
+				}else {
+					this.result = "Total: 0 You Fail!";
+				}
+			}
+		},
+
+
+
+	})
+
+
+	var a =10;
+	var b = a;
+	b = 15;
+
+	console.log(a)
+	console.log(b)
+
+</script>
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstarap.jquery.js"></script>
+</body>
+</html>

@@ -1,51 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="css/bootstrap-4.0.css">
-	<script src="js/vue.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<link rel="stylesheet" href="css/bootstrap-4.0.css">
+<script src="js/vue.js"></script>
 </head>
 <body>
 
 <div id="app">
-	<div class="container">
-		<h3>{{timeg()}}</h3>
-
+	<div class="container pt-5">
+		<div class="row">
+			<div class="col-3">
+				<div class="form-group">
+					<input v-model="search_by" type="text" class="form-control" placeholder="Search" @keyup="search">
+				</div>
+				<ul>
+					<li v-for="v in match_data">{{v.title}}</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 </div>
 
 
 <script>
 
-	"use strict"
-
+"use strict"
 new Vue({
-
 	el: '#app',
-	data:{
-		timeg:'',
+
+	data: {
+		search_by:"",
+		match_data:[],
+
+
+
+		datalist:[
+			{title:'I’d like to begin this lesson'},
+			{title:'This will feel confusing'},
+			{title:'location in your computer'},
+			{title:'Objects are created at some location'},
+			{title:'your computer’s memory'},
+			{title:'When we assign and use'},
+			{title:'a reference-type variable'},
+			{title:'Notice that the value, the address'},
+			{title:'contained by the variable'},
+			{title:'Assigning by Reference'},
+			{title:'When a reference type value'},
+			{title:'Each variable now contains'}
+		],
 	},
-	created(){
-		this.timeg=function() {
-			return new Date().toLocaleTimeString();
+
+	methods:{
+		search:function(){
+			if(!this.search_by){
+				return this.match_data = this.datalist.filter(value=>{
+					return value.title.toLowerCase().includes(this.search_by.toLowerCase())
+				})
+			}else{
+				this.match_data=[];
+			}
+			
 		}
 	},
-	methods:{		
-		
-	},
-	mounted(){		
-		setInterval(this.timeg, 1000);
-	}
 
+	
 })
-
 </script>
 
-<style>
-	
-</style>
+
 
 
 <script src="js/jquery.js"></script>
