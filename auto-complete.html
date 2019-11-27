@@ -15,16 +15,16 @@
 			<div class="col-3">
 
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search" @keyup="search_text($event,'0')" v-model="vl[0]">
+					<input type="text" class="form-control" placeholder="Search" @keyup="search_text($event,'1')" v-model="vl[1]">
 					<ul class="result">
-						<li v-if="match_data[0]" v-for="x in match_data[0]" @click="pasteVal('0',x.title)">{{x.title}}</li>
+						<li v-if="match_data[1]" v-for="x in match_data[1]" @click="pasteVal('1',x.title)">{{x.title}}</li>
 					</ul>
 				</div>
 
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search" @keyup="search_text($event,'1')" v-model="vl[1]">
+					<input type="text" class="form-control" placeholder="Search" @keyup="search_text($event,'2')" v-model="vl[2]">
 					<ul class="result">
-						<li v-if="match_data[1]" v-for="x in match_data[1]" @click="pasteVal('1',x.title)">{{x.title}}</li>
+						<li v-if="match_data[2]" v-for="x in match_data[2]" @click="pasteVal('2',x.title)">{{x.title}}</li>
 					</ul>
 				</div>
 
@@ -62,20 +62,13 @@ new Vue({
 	methods:{
 		search_text:function(e,id){
 			this.match_data=[];
-
 			this.match_data[id] =  this.datalist.filter(getText=>{
 				return getText.title.includes(e.target.value);
 			});
 		},
 		pasteVal:function(id,val){
-			console.log(val);
 			this.vl[id]=val;
 			this.match_data=[];
-
-			console.log(this.datalist.indexOf(val));
-
-			
-
 		}	
 	},
 	
