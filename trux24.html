@@ -21,12 +21,50 @@
 					<span class="rate-text">Assurance to get truck / cargo rental at lowest rates in the country</span>
 					<p>Trux24 offers one of the largest truck rental solution on the market. Plus,<br> its an affordable option among others</p>
 
-					<div class="banner-btns">
+					<div class="banner-btns clearfix">
 						<a class="free-post" href="#">Create a Free Post <i class="fa fa-play"></i></a>
+						<div class="play">
+							<a href="">
+								<span><i class="fa fa-play"></i></span>
+								<strong>Watch<br>how to use</strong>
+							</a>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-7">
 					<div><img class="img-responsive" src="images/banner.png"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="post-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="trip-left">
+					<h2>It's easy to create post<br> and grab trip </h2>
+                    <p>Super easy to make a post, you can find  your requered truck with  low prire, we can asure that. our system publish your need and notify all truck woner, agent and truck driver, they are bidding agenst your post and you can choose which one you accept, </p>
+                    
+                    <p>If you are a truck owner, agent or truck driver then you grab to more trip and earn more money. </p>
+                    
+                    <a class="common-btn" href="#">Try its Free <i class="fa fa-play"></i></a>
+				</div>
+			</div>
+            
+            <div class="col-md-6">
+				<div class="row">
+                	<div class="col-md-6">
+                    	<div class="trip-right">
+                    		<img class="img-responsive" src="images/trip-1.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    	<div class="trip-right">
+                    		<img class="img-responsive" src="images/trip-1.png" alt="">
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -72,7 +110,7 @@ body{
 	display: block;
 }
 .banner-btns{
-	padding: 0;
+	padding:25px 0 0;
 	margin: 0;
 }
 .free-post{
@@ -85,21 +123,128 @@ body{
 	font-weight: 500;
 	position: relative;
 	border: 2px solid #48486b;
+	transition: all 500ms;
+
 }
 .free-post:hover{
 	text-decoration: none;
 	border-color:#f68e47;
+	border-radius:50px; 
 }
+.common-btn i,
 .free-post i{
 	font-size: 10px;
 	position: absolute;
 	right: 22px;
 	top: 50%;
 	transform: translateY(-50%);
+
+	-webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 2s; /* Safari 4.0 - 8.0 */
+	-webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+	animation-name: example;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-play-state: paused;
 }
+
+@keyframes example {
+	0%   {right:22px;}
+	25%  {right:15px; }
+	50%  {right:20px;}
+	75%  {right:10px;}
+	100% {right:22px;}
+}
+.common-btn:hover i,
 .free-post:hover i{
 	color: #f68e47;
+	text-decoration:none;
+	animation-play-state: running;
 }
+.play{
+	padding: 0 0 0 25px;
+	margin: 0;
+	float: left;
+}
+.play a{
+	color: #48486b;
+	float: left;
+}
+.play span{
+	width: 56px;
+	height: 56px;
+	float: left;
+	display: flex;
+	border: 2px solid #3f3e5a; 
+	border-radius:50%; 
+}
+.play i{
+	margin: auto;
+	font-size:22px;
+	transition: all 400ms;
+}
+.play strong{
+	padding:13px 0 0 10px;
+	font-size: 15px;
+	line-height: 15px;
+	font-weight: normal;
+	float: left;
+	transition: all 400ms; 
+}
+.play a:hover span{
+	border-color: #f68e47; 
+}
+.play a:hover strong{
+	padding-left: 15px;
+}
+.play a:hover i{
+	color: #f68e47;
+	transform: scale(1.2);
+}
+.post-section{
+	padding:50px 0 40px;
+	margin:0;
+}
+.trip-left{
+	padding:0;
+	margin:0;
+}
+.trip-left h2{
+	padding:0 0 28px;
+	margin:0;
+	color:#3d3c59;
+	font-size:46px;
+	line-height:60px;
+	font-weight:600;
+}
+.trip-left p{
+	padding:0 0 28px;
+	margin:0;
+	color:#616161;
+	font-size:16px;
+	line-height:28px;
+}
+.common-btn{
+	padding:0 39px 0 0;
+	margin:0;
+	color:#3d3c59;
+	font-size:16px;
+	line-height:20px;
+	font-weight:700;
+	position:relative;
+	text-transform:uppercase;
+}
+.common-btn:hover{
+	color:#f68e47;
+}
+.trip-right{
+	padding:38px 25px;
+	margin:0;
+	border:3px solid #585777;
+}
+
+
+
 </style>
 </body>
 </html>

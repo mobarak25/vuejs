@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<link rel="stylesheet" href="css/bootstrap-4.0.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<nav class="navbar navbar-expand-lg navbar-light bg-costpm">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#">Disabled</a>
+				</li>
+			</ul>
+			<ul class="list-inline m-0">
+			    <li class="list-inline-item"><a class="text-white" href="#">Sale Return</a></li>
+			    <li class="list-inline-item"><a class="text-white" href="#">Return</a></li>
+			    <li class="list-inline-item"><a class="text-white" href="#">K.O.T</a></li>
+			    <li class="list-inline-item"><a class="text-white" href="#">Hold</a></li>
+			    <li class="list-inline-item"><a class="text-white" href="#">Unhold</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container-fluid pt-2">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search" v-model="search_by_cat">
+				</div>
+
+				<ul class="list-group mt-2">
+					<li v-for="filterCat in filterCats"  class="list-group-item">{{filterCat.title}}</li>
+				</ul>
+
+			</div>
+			<div class="col-md-7">
+				<div class="row">
+					<div class="col-md-4" v-for="(product, index) in  products">
+						<img class="img-fluid" :src="product.img" :alt="product.title">
+						{{index}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+
+"use strict"
+new Vue({
+	el: '#app',
+
+	data: {
+		search_by_cat:'',
+
+		categories:[
+			{id:1, title:'All product'},
+			{id:2, title:'Cake'},
+			{id:3, title:'Mexican'},
+			{id:4, title:'Morbi leo risus'},
+			{id:5, title:'Porta ac consectetur ac'},
+			{id:6, title:'Vestibulum at eros'},
+			{id:7, title:'When we assign and'},
+			{id:8, title:'a reference-type'},
+			{id:9, title:'Notice that the'},
+			{id:10, title:'contained by the'},
+			{id:11, title:'Assigning by'},
+			{id:12, title:'When a reference'},
+			{id:13, title:'Each variable now'}
+		],
+
+		products:[
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/1.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/2.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/3.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/4.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/5.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/6.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/7.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/8.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/9.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/10.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/11.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/12.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/13.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/14.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/15.jpg'},
+			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/16.jpg'},
+		],
+	},
+
+	computed:{
+
+		filterCats:function(){
+			if(this.search_by_cat){
+		    	return this.categories.filter(element=>{
+		    		return  element.title.toLowerCase().includes(this.search_by_cat.toLowerCase());
+		    	})
+	    	}else{
+	    		return this.categories
+	    	}
+		},
+	}
+	
+})
+</script>
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstarap.jquery.js"></script>
+</body>
+</html>
