@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title></title>
 <link rel="stylesheet" href="css/bootstrap-4.0.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/font-awesome.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/vue.js"></script>
 </head>
@@ -30,7 +30,7 @@
 				</li>
 			</ul>
 			<ul class="list-inline m-0">
-			    <li class="list-inline-item"><a class="text-white" href="#">Sale Return</a></li>
+			    <li class="list-inline-item"><a class="text-white" href="#"><i class="fa fa-retweet"></i> Sale Return</a></li>
 			    <li class="list-inline-item"><a class="text-white" href="#">Return</a></li>
 			    <li class="list-inline-item"><a class="text-white" href="#">K.O.T</a></li>
 			    <li class="list-inline-item"><a class="text-white" href="#">Hold</a></li>
@@ -46,14 +46,18 @@
 				</div>
 
 				<ul class="list-group mt-2">
-					<li v-for="filterCat in filterCats"  class="list-group-item">{{filterCat.title}}</li>
+					<li v-for="filterCat in filterCats" @click="filterByCat(filterCat.id)" class="list-group-item">{{filterCat.title}}</li>
 				</ul>
 
 			</div>
 			<div class="col-md-7">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search" v-model="search_by_product">
+				</div>
+
 				<div class="row">
-					<div class="col-md-4" v-for="(product, index) in  products">
-						<img class="img-fluid" :src="product.img" :alt="product.title">
+					<div class="col-md-4" v-for="(filterProduct, index) in  filterProducts">
+						<img class="img-fluid" :src="filterProduct.img" :alt="filterProduct.title">
 						{{index}}
 					</div>
 				</div>
@@ -71,6 +75,7 @@ new Vue({
 
 	data: {
 		search_by_cat:'',
+		search_by_product:'',
 
 		categories:[
 			{id:1, title:'All product'},
@@ -105,7 +110,25 @@ new Vue({
 			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/14.jpg'},
 			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/15.jpg'},
 			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/16.jpg'},
+
+			{id:1, parent_id:3, title:'Mexican Pizza 8 Inch', img:'images/mexican/1.jpg'},
+			{id:1, parent_id:3, title:'Mexican Pizza 8 Inch', img:'images/mexican/2.jpg'},
+			{id:1, parent_id:3, title:'Mexican Pizza 8 Inch', img:'images/mexican/3.jpg'},
+			{id:1, parent_id:3, title:'Mexican Pizza 8 Inch', img:'images/mexican/4.jpg'},
+
 		],
+	},
+
+	methods:{
+		filterByCat:function(id){
+			return this.products.filter(val=>{
+				return this.filterProducts = (val.parent_id == id);
+
+			})
+
+			console.log(id)
+			
+		}
 	},
 
 	computed:{
@@ -113,10 +136,20 @@ new Vue({
 		filterCats:function(){
 			if(this.search_by_cat){
 		    	return this.categories.filter(element=>{
-		    		return  element.title.toLowerCase().includes(this.search_by_cat.toLowerCase());
+		    		return element.title.toLowerCase().includes(this.search_by_cat.toLowerCase());
 		    	})
 	    	}else{
 	    		return this.categories
+	    	}
+		},
+
+		filterProducts:function(){
+			if(this.search_by_product){
+		    	return this.products.filter(element=>{
+		    		return element.title.toLowerCase().includes(this.search_by_product.toLowerCase());
+		    	})
+	    	}else{
+	    		return this.products
 	    	}
 		},
 	}
