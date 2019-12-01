@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<link rel="stylesheet" href="css/bootstrap-4.0.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<nav class="navbar navbar-expand-lg navbar-light bg-costpm">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#">Disabled</a>
+				</li>
+			</ul>
+			<form class="form-inline">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">@</span>
+					</div>
+					<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+				</div>
+			</form>
+		</div>
+	</nav>
+	<div class="container-fluid pt-2">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="input-group">
+					
+					<input @keyup="filterCat" type="text" class="form-control" placeholder="Search">
+				</div>
+
+				<ul class="list-group">
+					<li v-for="category in categories" class="list-group-item">{{ category.title}}</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+
+"use strict"
+new Vue({
+	el: '#app',
+
+	data: {
+
+		categories:[
+			{title:'Cras justo odio'},
+			{title:'Dapibus ac facilisis in'},
+			{title:'Morbi leo risus'},
+			{title:'Porta ac consectetur ac'},
+			{title:'Vestibulum at eros'},
+			{title:'When we assign and'},
+			{title:'a reference-type'},
+			{title:'Notice that the'},
+			{title:'contained by the'},
+			{title:'Assigning by'},
+			{title:'When a reference'},
+			{title:'Each variable now'}
+		],
+	},
+
+	methods:{
+
+		filterCat:function(e){
+			let input_cat_val = e.target.value;
+			if(input_cat_val){
+				return this.categories = this.categories.filter(elament=>{
+					return elament.title.toLowerCase().includes(input_cat_val.toLowerCase());
+				})
+			}else {
+				this.categories
+			}
+
+			console.log(this.categories);
+			
+		},
+	}
+	
+})
+</script>
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstarap.jquery.js"></script>
+</body>
+</html>
