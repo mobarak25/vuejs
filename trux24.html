@@ -37,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section><!-- //End  banner-->
 
 <section class="post-section">
 	<div class="container">
@@ -58,18 +58,40 @@
                 	<div class="col-md-6">
                     	<div class="trip-right">
                     		<img class="img-responsive" src="images/trip-1.png" alt="">
+                            <h3>Need Truck</h3>
+                            <a href="#" class="common-btn">Make a Post <i class="fa fa-play"></i></a>
                         </div>
                     </div>
                     <div class="col-md-6">
                     	<div class="trip-right">
                     		<img class="img-responsive" src="images/trip-1.png" alt="">
+                            <h3>Lazy Truck?</h3>
+                            <a href="#" class="common-btn">Start Bidding <i class="fa fa-play"></i></a>
                         </div>
                     </div>
 				</div>
 			</div>
 		</div>
 	</div>
-</section>	
+</section><!-- //End  post-section-->	
+
+<section class="app-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">&nbsp;</div>
+            
+            <div class="col-md-6">
+				<div class="appIn">
+                	<h3>Available on<br> google play store</h3>
+                    <img src="images/app.png" alt="">
+                    <p>Trucx24 android mobile app available on google play store for free, download the mobile app and start creating post or start bidding.</p>
+                    <a class="common-btn" href="#">Make a Post <i class="fa fa-play"></i></a>
+                </div>
+			</div>
+		</div>
+	</div>
+    <img class="app-bg" src="images/app-img.jpg" alt="">
+</section><!-- //End  app-section-->
 
 
 <script src="js/jquery.js"></script>
@@ -241,6 +263,67 @@ body{
 	padding:38px 25px;
 	margin:0;
 	border:3px solid #585777;
+	transition:all 500ms;
+}
+.trip-right:hover{
+	border-color:#f18231;
+}
+.trip-right img{
+	transition:all 400ms;
+}
+.trip-right:hover img{
+	transform:scale(1.1)
+}
+.trip-right h3{
+	padding:30px 0 25px;
+	margin:40px 0 0;
+	font-size:32px;
+	line-height:36px;
+	font-weight:600;
+	position:relative;
+}
+.trip-right h3:after{
+	content:"";
+	width:26px;
+	height:4px;
+	position:absolute;
+	top:0;
+	left:0;
+	background-color:#f18231;
+}
+
+.app-section{
+	padding:100px 0 80px;
+	margin:0;
+	position:relative;
+}
+.appIn{
+	padding:0;
+	margin:0;
+}
+.appIn h3{
+	padding:0 0 40px;
+	margin:0;
+	color: #3d3c59;
+    font-size:45px;
+    font-weight:600;
+    line-height:50px;
+}
+.appIn p{
+	padding:35px 0 22px;
+	margin:0;
+	color: #3d3c59;
+    font-size:19px;
+    line-height:32px;
+    font-weight:600;
+}
+.app-bg{
+	width:45%;
+	padding:0;
+	margin:0;
+	position:absolute;
+	left:0;
+	top:100px;
 }
 
 
