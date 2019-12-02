@@ -57,7 +57,7 @@
 
 				<div class="row mt-2">
 					<div class="col-md-4" v-for="(filterProduct) in  filterProducts">
-						<a @click.prevent="addCart(filterProduct.id)" href="#">
+						<a @click.prevent="addCart(filterProduct.id, filterProduct.title, filterProduct.price)" href="#">
 							<img class="img-fluid" :src="filterProduct.img" :alt="filterProduct.title">
 							<span class="title">{{filterProduct.title}}</span>
 						</a>
@@ -76,18 +76,13 @@
 				</thead>
 
 				<tbody>
-					<tr>
-						<td>MEXICAN PIZZA 8 INCH</td>
-						<td>300</td>
-						<td>1</td>
-						<td>300</td>
+					<tr v-for = "item in cart">
+						<td>{{ item.title }}</td>
+						<td>{{ item.unit_price }}</td>
+						<td>{{ item.qty }}</td>
+						<td>{{ item.total }}</td>
 					</tr>
-					<tr>
-						<td>MEXICAN PIZZA 8 INCH</td>
-						<td>300</td>
-						<td>1</td>
-						<td>300</td>
-					</tr>
+					
 				</tbody>
 			</table>
 			</div>
@@ -127,10 +122,10 @@ new Vue({
 
 		products:[
 
-			{id:1, parent_id:2, title:'Mexican Pizza 8 Inch', img:'images/mexican/1.jpg'},
-			{id:2, parent_id:2, title:'Sub Sandwich', img:'images/mexican/2.jpg'},
-			{id:3, parent_id:2, title:'Club Burger', img:'images/mexican/3.jpg'},
-			{id:4, parent_id:2, title:'Little Burger', img:'images/mexican/4.jpg'},
+			{id:1, parent_id:2, img:'images/mexican/1.jpg', price:200, title:'Mexican Pizza 8 Inch'},
+			{id:2, parent_id:2, img:'images/mexican/2.jpg', price:230, title:'Sub Sandwich'},
+			{id:3, parent_id:2, img:'images/mexican/3.jpg', price:270, title:'Club Burger'},
+			{id:4, parent_id:2, img:'images/mexican/4.jpg', price:300, title:'Little Burger'},
 
 			{id:5, parent_id:3, img:'images/cake/1.jpg', title:'strawberry-cake'},
 			{id:6, parent_id:3, img:'images/cake/2.jpg', title:'RED VELVET CAKE'},
@@ -157,26 +152,34 @@ new Vue({
 			id !== 1 ? (this.main_cat_id = id):(this.main_cat_id=''); 
 		},
 
-		addCart:function(id){
+		addCart:function(id, title, price){
 
-			let aCart = this.cart;
+			let quentity = 1;
 
-			if(aCart.indexOf(id.id) == -1){
-				alert('go');
-				 this.products.forEach( function(element) {
-					if(element.id == id){
-						
-						aCart.push(
-							{
-								id:element.id,
-								title:element.title,
-							}
-						)
+			let is_exit = this.cart.findIndex(value =>{
+				return value.id === id
+			});
 
+			if (is_exit == -1) {
+				this.cart.push({
+					id: id,
+					title: title,
+					qty: quentity,
+					unit_price:price,
+					total:price,
+				})
+			}else{
+				this.cart.forEach(value =>{
+					if(value.id === id){
+						value.qty++;
+						value.total = ( value.unit_price * value.qty );
 					}
-					
 				});
 			}
+
+
+
+			
 		}
 	},
 
