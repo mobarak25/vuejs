@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<link rel="stylesheet" href="css/bootstrap-4.0.css">
+<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<div id="app">
+		<button v-on:click="changeName(2)">Change Name</button>
+		<button v-on:click="changeName(1)">Change Name</button>
+	</div>
+</div>
+
+
+<script>
+
+"use strict"
+new Vue({
+el: '#app',
+
+data: {
+	arr:[{id:1},{id:2},{id:1}],
+	unic:[],
+},
+
+
+methods: {
+	changeName:function(e){
+		var b = this.unic.findIndex(i =>{
+			return i.id === e
+		});
+
+		if (b == -1) {
+			this.unic.push({
+				id:e
+			})
+		}
+	}
+	
+},
+
+
+
+});
+</script>
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstarap.jquery.js"></script>
+</body>
+</html>

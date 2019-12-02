@@ -42,7 +42,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" v-model="search_by_cat">
+					<input type="text" class="form-control" placeholder="Search category" v-model="search_by_cat">
 				</div>
 
 				<ul class="list-group mt-2">
@@ -52,15 +52,44 @@
 			</div>
 			<div class="col-md-7">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" v-model="search_by_product">
+					<input type="text" class="form-control" placeholder="Search by product name" v-model="search_by_product">
 				</div>
 
-				<div class="row">
-					<div class="col-md-4" v-for="(filterProduct, index) in  filterProducts">
-						<img class="img-fluid" :src="filterProduct.img" :alt="filterProduct.title">
-						{{index}}
+				<div class="row mt-2">
+					<div class="col-md-4" v-for="(filterProduct) in  filterProducts">
+						<a @click.prevent="addCart(filterProduct.id)" href="#">
+							<img class="img-fluid" :src="filterProduct.img" :alt="filterProduct.title">
+							<span class="title">{{filterProduct.title}}</span>
+						</a>
 					</div>
 				</div>
+			</div>
+			<div class="col-md-3">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th><div style="width:56px;">Unit Price</div></th>
+						<th>Qty</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>MEXICAN PIZZA 8 INCH</td>
+						<td>300</td>
+						<td>1</td>
+						<td>300</td>
+					</tr>
+					<tr>
+						<td>MEXICAN PIZZA 8 INCH</td>
+						<td>300</td>
+						<td>1</td>
+						<td>300</td>
+					</tr>
+				</tbody>
+			</table>
 			</div>
 		</div>
 	</div>
@@ -77,10 +106,13 @@ new Vue({
 		search_by_cat:'',
 		search_by_product:'',
 
+		main_cat_id:'',
+		cart:[],
+
 		categories:[
 			{id:1, title:'All product'},
-			{id:2, title:'Cake'},
-			{id:3, title:'Mexican'},
+			{id:2, title:'Mexican'},
+			{id:3, title:'Cake'},
 			{id:4, title:'Morbi leo risus'},
 			{id:5, title:'Porta ac consectetur ac'},
 			{id:6, title:'Vestibulum at eros'},
@@ -94,40 +126,57 @@ new Vue({
 		],
 
 		products:[
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/1.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/2.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/3.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/4.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/5.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/6.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/7.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/8.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/9.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/10.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/11.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/12.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/13.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/14.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/15.jpg'},
-			{id:1, parent_id:2, title:'strawberry-cake', img:'images/cake/16.jpg'},
 
-			{id:1, parent_id:3, title:'Mexican Pizza 8 Inch', img:'images/mexican/1.jpg'},
-			{id:1, parent_id:3, title:'Mexican Pizza 8 Inch', img:'images/mexican/2.jpg'},
-			{id:1, parent_id:3, title:'Mexican Pizza 8 Inch', img:'images/mexican/3.jpg'},
-			{id:1, parent_id:3, title:'Mexican Pizza 8 Inch', img:'images/mexican/4.jpg'},
+			{id:1, parent_id:2, title:'Mexican Pizza 8 Inch', img:'images/mexican/1.jpg'},
+			{id:2, parent_id:2, title:'Sub Sandwich', img:'images/mexican/2.jpg'},
+			{id:3, parent_id:2, title:'Club Burger', img:'images/mexican/3.jpg'},
+			{id:4, parent_id:2, title:'Little Burger', img:'images/mexican/4.jpg'},
 
+			{id:5, parent_id:3, img:'images/cake/1.jpg', title:'strawberry-cake'},
+			{id:6, parent_id:3, img:'images/cake/2.jpg', title:'RED VELVET CAKE'},
+			{id:7, parent_id:3, img:'images/cake/3.jpg', title:'WHITE FOREST CAKE'},
+			{id:8, parent_id:3, img:'images/cake/4.jpg', title:'VANILLA CAKE'},
+			{id:9, parent_id:3, img:'images/cake/5.jpg', title:'BLACK & WHITE FOREST CAKE'},
+			{id:10, parent_id:3, img:'images/cake/6.jpg', title:'CHOCO COFFEE CAKE'},
+			{id:11, parent_id:3, img:'images/cake/7.jpg', title:'BLACK COFFEE CAKE'},
+			{id:12, parent_id:3, img:'images/cake/8.jpg', title:'BLACK FOREST CAKE'},
+			{id:13, parent_id:3, img:'images/cake/9.jpg', title:'CHOCOLATE FUDGE CAKE'},
+			{id:14, parent_id:3, img:'images/cake/10.jpg', title:'CHOCOLATE LADY CAKE'},
+			{id:15, parent_id:3, img:'images/cake/11.jpg', title:'CHOCO VANILLA DIVIDED CAKE'},
+			{id:16, parent_id:3, img:'images/cake/12.jpg', title:'CHOCO VANILLA MARBLE CAKE'},
+			{id:17, parent_id:3, img:'images/cake/13.jpg', title:'CHOCOLATE CAKE'},
+			{id:18, parent_id:3, img:'images/cake/14.jpg', title:'CHOCOLATE COATED CAKE'},
+			{id:19, parent_id:3, img:'images/cake/15.jpg', title:'COFFEE CAKE'},
+			{id:20, parent_id:3, img:'images/cake/16.jpg', title:'PREMIUM VANILLA CAKE'},
 		],
 	},
 
 	methods:{
+
 		filterByCat:function(id){
-			return this.products.filter(val=>{
-				return this.filterProducts = (val.parent_id == id);
+			id !== 1 ? (this.main_cat_id = id):(this.main_cat_id=''); 
+		},
 
-			})
+		addCart:function(id){
 
-			console.log(id)
-			
+			let aCart = this.cart;
+
+			if(aCart.indexOf(id.id) == -1){
+				alert('go');
+				 this.products.forEach( function(element) {
+					if(element.id == id){
+						
+						aCart.push(
+							{
+								id:element.id,
+								title:element.title,
+							}
+						)
+
+					}
+					
+				});
+			}
 		}
 	},
 
@@ -135,7 +184,7 @@ new Vue({
 
 		filterCats:function(){
 			if(this.search_by_cat){
-		    	return this.categories.filter(element=>{
+		    	return this.filterProducts.filter(element=>{
 		    		return element.title.toLowerCase().includes(this.search_by_cat.toLowerCase());
 		    	})
 	    	}else{
@@ -144,10 +193,23 @@ new Vue({
 		},
 
 		filterProducts:function(){
-			if(this.search_by_product){
+			
+			if(this.search_by_product && !this.main_cat_id){
 		    	return this.products.filter(element=>{
 		    		return element.title.toLowerCase().includes(this.search_by_product.toLowerCase());
 		    	})
+	    	}else if (this.search_by_product && this.main_cat_id) {
+
+	    		return this.products.filter(element=>{
+		    		return element.title.toLowerCase().includes(this.search_by_product.toLowerCase()) && element.parent_id === parseInt(this.main_cat_id);
+		    	})
+
+	    	}else if (this.main_cat_id) {
+
+	    		return this.products.filter(element=>{
+		    		return element.parent_id === parseInt(this.main_cat_id);
+		    	})
+	    		
 	    	}else{
 	    		return this.products
 	    	}
