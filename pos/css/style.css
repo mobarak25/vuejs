@@ -19,10 +19,34 @@ a:hover{
 	font-size: 12px;
 }
 .table th{
-	padding:15px 2px;
+	padding:9px 10px;
 }
 .table td{
-	padding:9px 2px;
+	padding:15px 10px;
+	color: #ee1d24;
 	font-size: 12px;
+	line-height: 12px;
 	text-transform: lowercase;
+	border-bottom:2px solid #dee2e6;
+}
+.rgtMenu li{
+	font-size: 12px;
+}
+.rgtMenu li .icon{
+	padding:0;
+	font-size: 16px;
+	line-height: 14px;
+	text-align: center;
+}
+.total{
+	width:25%;
+	padding:10px 10px;
+	margin:0;
+	color: #ee1d24;
+	font-size:26px;
+	line-height:26px;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	border-top:2px solid #dee2e6; 
 }

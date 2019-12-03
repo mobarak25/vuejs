@@ -29,30 +29,44 @@
 					<a class="nav-link disabled" href="#">Disabled</a>
 				</li>
 			</ul>
-			<ul class="list-inline m-0">
-			    <li class="list-inline-item"><a class="text-white" href="#"><i class="fa fa-retweet"></i> Sale Return</a></li>
-			    <li class="list-inline-item"><a class="text-white" href="#">Return</a></li>
-			    <li class="list-inline-item"><a class="text-white" href="#">K.O.T</a></li>
+			<ul class="list-inline m-0 rgtMenu">
+
+			    <li class="list-inline-item">
+			    	<a class="text-white" href="#">
+						<div class="icon"><i class="fa fa-recycle"></i></div>Sale Return
+			    	</a>
+			    </li>
+			    <li class="list-inline-item">
+			    	<a class="text-white" @click.prevent="cleanCart" href="#">
+			    		<div class="icon"><i class="fa fa-refresh"></i></div>New
+			    	</a>
+			    </li>
+			    <li class="list-inline-item">
+			    	<a class="text-white" href="#">
+			    		<div class="icon"><i class="fa fa-cutlery"></i></div>K.O.T
+			    	</a>
+			    </li>
+
 			    <li class="list-inline-item"><a class="text-white" href="#">Hold</a></li>
 			    <li class="list-inline-item"><a class="text-white" href="#">Unhold</a></li>
 			</ul>
 		</div>
 	</nav>
-	<div class="container-fluid pt-2">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search category" v-model="search_by_cat">
+					<input type="text" class="form-control border-0 rounded-0" placeholder="Search category" v-model="search_by_cat">
 				</div>
 
 				<ul class="list-group mt-2">
 					<li v-for="filterCat in filterCats" @click="filterByCat(filterCat.id)" class="list-group-item">{{filterCat.title}}</li>
 				</ul>
-
 			</div>
-			<div class="col-md-7">
+
+			<div class="col-md-7 border-left">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search by product name" v-model="search_by_product">
+					<input type="text" class="form-control border-0 rounded-0" placeholder="Search by product name" v-model="search_by_product">
 				</div>
 
 				<div class="row mt-2">
@@ -64,27 +78,32 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th><div style="width:56px;">Unit Price</div></th>
-						<th>Qty</th>
-						<th>Total</th>
-					</tr>
-				</thead>
 
-				<tbody>
-					<tr v-for = "item in cart">
-						<td>{{ item.title }}</td>
-						<td>{{ item.unit_price }}</td>
-						<td>{{ item.qty }}</td>
-						<td>{{ item.total }}</td>
-					</tr>
-					
-				</tbody>
-			</table>
+			<div class="col-md-3 border-left">
+				<div class="row">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th><div style="width:56px;">Unit Price</div></th>
+								<th>Qty</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr v-for = "item in cart">
+								<td>{{ item.title }}</td>
+								<td>{{ item.unit_price }}</td>
+								<td>{{ item.qty }}</td>
+								<td>{{ item.total }}</td>
+							</tr>
+							
+						</tbody>
+					</table>
+
+					<h1 class="total">Total: {{grandTotal}}.00</h1>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -110,14 +129,7 @@ new Vue({
 			{id:3, title:'Cake'},
 			{id:4, title:'Morbi leo risus'},
 			{id:5, title:'Porta ac consectetur ac'},
-			{id:6, title:'Vestibulum at eros'},
-			{id:7, title:'When we assign and'},
-			{id:8, title:'a reference-type'},
-			{id:9, title:'Notice that the'},
-			{id:10, title:'contained by the'},
-			{id:11, title:'Assigning by'},
-			{id:12, title:'When a reference'},
-			{id:13, title:'Each variable now'}
+			{id:6, title:'Vestibulum at eros'}
 		],
 
 		products:[
@@ -127,31 +139,32 @@ new Vue({
 			{id:3, parent_id:2, img:'images/mexican/3.jpg', price:270, title:'Club Burger'},
 			{id:4, parent_id:2, img:'images/mexican/4.jpg', price:300, title:'Little Burger'},
 
-			{id:5, parent_id:3, img:'images/cake/1.jpg', title:'strawberry-cake'},
-			{id:6, parent_id:3, img:'images/cake/2.jpg', title:'RED VELVET CAKE'},
-			{id:7, parent_id:3, img:'images/cake/3.jpg', title:'WHITE FOREST CAKE'},
-			{id:8, parent_id:3, img:'images/cake/4.jpg', title:'VANILLA CAKE'},
-			{id:9, parent_id:3, img:'images/cake/5.jpg', title:'BLACK & WHITE FOREST CAKE'},
-			{id:10, parent_id:3, img:'images/cake/6.jpg', title:'CHOCO COFFEE CAKE'},
-			{id:11, parent_id:3, img:'images/cake/7.jpg', title:'BLACK COFFEE CAKE'},
-			{id:12, parent_id:3, img:'images/cake/8.jpg', title:'BLACK FOREST CAKE'},
-			{id:13, parent_id:3, img:'images/cake/9.jpg', title:'CHOCOLATE FUDGE CAKE'},
-			{id:14, parent_id:3, img:'images/cake/10.jpg', title:'CHOCOLATE LADY CAKE'},
-			{id:15, parent_id:3, img:'images/cake/11.jpg', title:'CHOCO VANILLA DIVIDED CAKE'},
-			{id:16, parent_id:3, img:'images/cake/12.jpg', title:'CHOCO VANILLA MARBLE CAKE'},
-			{id:17, parent_id:3, img:'images/cake/13.jpg', title:'CHOCOLATE CAKE'},
-			{id:18, parent_id:3, img:'images/cake/14.jpg', title:'CHOCOLATE COATED CAKE'},
-			{id:19, parent_id:3, img:'images/cake/15.jpg', title:'COFFEE CAKE'},
-			{id:20, parent_id:3, img:'images/cake/16.jpg', title:'PREMIUM VANILLA CAKE'},
+			{id:5, parent_id:3, img:'images/cake/1.jpg', price:92, title:'strawberry-cake'},
+			{id:6, parent_id:3, img:'images/cake/2.jpg', price:90, title:'RED VELVET CAKE'},
+			{id:7, parent_id:3, img:'images/cake/3.jpg', price:50, title:'WHITE FOREST CAKE'},
+			{id:8, parent_id:3, img:'images/cake/4.jpg', price:20, title:'VANILLA CAKE'},
+			{id:9, parent_id:3, img:'images/cake/5.jpg', price:23, title:'BLACK & WHITE FOREST CAKE'},
+			{id:10, parent_id:3, img:'images/cake/6.jpg', price:430, title:'CHOCO COFFEE CAKE'},
+			{id:11, parent_id:3, img:'images/cake/7.jpg', price:530, title:'BLACK COFFEE CAKE'},
+			{id:12, parent_id:3, img:'images/cake/8.jpg', price:100, title:'BLACK FOREST CAKE'},
+			{id:13, parent_id:3, img:'images/cake/9.jpg', price:201, title:'CHOCOLATE FUDGE CAKE'},
+			{id:14, parent_id:3, img:'images/cake/10.jpg', price:65, title:'CHOCOLATE LADY CAKE'},
+			{id:15, parent_id:3, img:'images/cake/11.jpg', price:188, title:'CHOCO VANILLA DIVIDED CAKE'},
+			{id:16, parent_id:3, img:'images/cake/12.jpg', price:69, title:'CHOCO VANILLA MARBLE CAKE'},
+			{id:17, parent_id:3, img:'images/cake/13.jpg', price:50, title:'CHOCOLATE CAKE'},
+			{id:18, parent_id:3, img:'images/cake/14.jpg', price:270, title:'CHOCOLATE COATED CAKE'},
+			{id:19, parent_id:3, img:'images/cake/15.jpg', price:130, title:'COFFEE CAKE'},
+			{id:20, parent_id:3, img:'images/cake/16.jpg', price:100, title:'PREMIUM VANILLA CAKE'},
 		],
 	},
 
 	methods:{
-
+		/* #### This function for filter PRODUCT by clicking #### */
 		filterByCat:function(id){
 			id !== 1 ? (this.main_cat_id = id):(this.main_cat_id=''); 
 		},
 
+		/* #### This function for add product in CART #### */
 		addCart:function(id, title, price){
 
 			let quentity = 1;
@@ -176,18 +189,22 @@ new Vue({
 					}
 				});
 			}
+		},
 
-
-
-			
-		}
+		/* #### This function for CLEAR cart #### */
+		cleanCart:function(){
+			if (confirm("Are you clean order ?")) {
+				this.cart = [];
+			}
+		},
 	},
 
 	computed:{
 
+		/* #### This function for CATEGORY Filter with result Show #### */
 		filterCats:function(){
 			if(this.search_by_cat){
-		    	return this.filterProducts.filter(element=>{
+		    	return this.categories.filter(element=>{
 		    		return element.title.toLowerCase().includes(this.search_by_cat.toLowerCase());
 		    	})
 	    	}else{
@@ -195,6 +212,8 @@ new Vue({
 	    	}
 		},
 
+
+		/* #### This function for PRODUCT Filter with result Show #### */
 		filterProducts:function(){
 			
 			if(this.search_by_product && !this.main_cat_id){
@@ -217,6 +236,17 @@ new Vue({
 	    		return this.products
 	    	}
 		},
+
+
+		grandTotal:function(){
+			let cartTotal = 0;
+
+			this.cart.forEach( function(item) {
+				cartTotal += item.total;
+			});
+			return cartTotal;
+		}
+		
 	}
 	
 })
