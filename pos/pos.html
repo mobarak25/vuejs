@@ -93,12 +93,12 @@
 						</thead>
 
 						<tbody>
-							<tr v-for = "item in cart">
+							<tr v-for = "(item, index) in cart">
 								<td>{{ item.title }}</td>
-								<td>{{ item.unit_price }}</td>
-								<td>{{ item.qty }}</td>
-								<td>{{ item.total }}</td>
-								<td><i class="fa fa-times-circle"></i></td>
+								<td class="text-center">{{ item.unit_price }}</td>
+								<td class="text-center">{{ item.qty }}</td>
+								<td class="text-center">{{ item.total }}</td>
+								<td class="text-center"><a @click.prevent="deleteCartItm(index)" class="remove" href="#"> <i class="fa fa-times-circle"></i></a></td>
 							</tr>
 							
 						</tbody>
@@ -199,6 +199,12 @@ new Vue({
 				this.cart = [];
 			}
 		},
+
+		/* #### This function for DELETE CART ITEM #### */
+		deleteCartItm:function(id){
+			this.cart.splice(id,1);
+		},
+
 	},
 
 	computed:{
