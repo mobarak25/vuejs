@@ -39,7 +39,7 @@ a:hover{
 	text-align: center;
 }
 .total{
-	width:25%;
+	width:calc(25% - 1px);
 	padding:10px 10px;
 	margin:0;
 	color: #ee1d24;
@@ -48,7 +48,8 @@ a:hover{
 	position: fixed;
 	right: 0;
 	bottom: 0;
-	border-top:2px solid #dee2e6; 
+	border-top:2px solid #dee2e6;
+	background-color:#fff; 
 }
 .remove{
 	font-size: 16px

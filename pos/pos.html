@@ -80,7 +80,7 @@
 			</div>
 
 			<div class="col-md-3 border-left">
-				<div class="row">
+				<div class="row" id="demo">
 					<table class="table">
 						<thead>
 							<tr>
@@ -103,6 +103,8 @@
 							
 						</tbody>
 					</table>
+
+					<button v-on:click="PDFGen">Change Name</button>
 
 					<h1 class="total">Total: {{grandTotal}}.00</h1>
 				</div>
@@ -205,6 +207,13 @@ new Vue({
 			this.cart.splice(id,1);
 		},
 
+		PDFGen:function(){
+			var doc = new jsPDF();
+			doc.fromHTML($('#demo').get(0), 20, 20, {
+	            'width': 500});
+	        doc.save('sample-file.pdf');
+		},
+
 	},
 
 	computed:{
@@ -265,5 +274,6 @@ new Vue({
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstarap.jquery.js"></script>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 </body>
 </html>

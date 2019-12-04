@@ -11,12 +11,35 @@
 </head>
 <body>
 
+
 <div id="app">
-	<div id="app">
-		<button v-on:click="changeName(2)">Change Name</button>
-		<button v-on:click="changeName(1)">Change Name</button>
+	<div id="demo">
+		<table style="padding: 0; margin: 0;">
+			<tr>
+				<th style="padding: 0; margin: 0;">header</th>
+				<th style="padding: 0; margin: 0;">header</th>
+				<th style="padding: 0; margin: 0;">header</th>
+			</tr>
+		
+			<tr>
+				<td style="padding: 0; margin: 0;">data</td>
+				<td style="padding: 0; margin: 0;">data</td>
+				<td style="padding: 0; margin: 0;">data</td>
+			</tr>
+			
+		</table>
+		<style>
+	#demo table,
+	#demo table td,
+	#demo table th{
+		padding: 0;
+		margin: 0;
+	}
+</style>
 	</div>
+	<button v-on:click="PDFGen">Change Name</button>
 </div>
+
 
 
 <script>
@@ -26,24 +49,17 @@ new Vue({
 el: '#app',
 
 data: {
-	arr:[{id:1},{id:2},{id:1}],
-	unic:[],
+	
 },
 
 
 methods: {
-	changeName:function(e){
-		var b = this.unic.findIndex(i =>{
-			return i.id === e
-		});
-
-		if (b == -1) {
-			this.unic.push({
-				id:e
-			})
-		}
+	PDFGen:function(){
+		var doc = new jsPDF();
+		doc.fromHTML($('#demo').get(0), 20, 20, {
+            'width': 500});
+        doc.save('sample-file.pdf');
 	}
-	
 },
 
 
@@ -56,5 +72,6 @@ methods: {
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstarap.jquery.js"></script>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 </body>
 </html>
