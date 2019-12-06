@@ -1,77 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title></title>
-<link rel="stylesheet" href="css/bootstrap-4.0.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style.css">
-<script src="js/vue.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.12.2/printThis.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
+
+    td.active1 {
+        color: #ff0000;
+    }
+
+</style>
 </head>
 <body>
 
+<a class="btn btn-warning" id="print">Print</a>
+<div class="container" id="examples">
+<table class="table table-bordered" style="width:500px; margin:0 auto;">
+    <thead>
+        <tr>
+            <th>Id</th>
 
-<div id="app">
-	<div id="demo">
-		<table style="padding: 0; margin: 0;">
-			<tr>
-				<th style="padding: 0; margin: 0;">header</th>
-				<th style="padding: 0; margin: 0;">header</th>
-				<th style="padding: 0; margin: 0;">header</th>
-			</tr>
-		
-			<tr>
-				<td style="padding: 0; margin: 0;">data</td>
-				<td style="padding: 0; margin: 0;">data</td>
-				<td style="padding: 0; margin: 0;">data</td>
-			</tr>
-			
-		</table>
-		<style>
-	#demo table,
-	#demo table td,
-	#demo table th{
-		padding: 0;
-		margin: 0;
-	}
-</style>
-	</div>
-	<button v-on:click="PDFGen">Change Name</button>
+            <th class="text-danger">Customer Name</th>
+
+            <th>Description</th>
+            <th>Order Number</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+
+            <td>lNsbTEo</td>
+            <td>eweeedm</td>
+            <td>fdvjhdhd</td>
+            <td class="active1">1958</td>
+        </tr>
+
+    </tbody>
+
+</table>
 </div>
 
 
-
 <script>
-
-"use strict"
-new Vue({
-el: '#app',
-
-data: {
-	
-},
-
-
-methods: {
-	PDFGen:function(){
-		var doc = new jsPDF();
-		doc.fromHTML($('#demo').get(0), 20, 20, {
-            'width': 500});
-        doc.save('sample-file.pdf');
-	}
-},
-
-
-
-});
+    $(document).ready(function(){
+      $("#print").click(function(){
+        $("#examples").printThis({
+            importCSS: true,            // import parent page css
+            importStyle: true,
+            header: "<h1>Look at all of my kitties!</h1>"
+        });
+      });
+    });
 </script>
 
 
-
-
-<script src="js/jquery.js"></script>
-<script src="js/bootstarap.jquery.js"></script>
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 </body>
 </html>
