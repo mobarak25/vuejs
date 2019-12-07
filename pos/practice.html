@@ -14,6 +14,7 @@
 
 <div id="app">
 	<div id="demo">
+
 		<table style="padding: 0; margin: 0;">
 			<tr>
 				<th style="padding: 0; margin: 0;">header</th>
@@ -26,16 +27,38 @@
 				<td style="padding: 0; margin: 0;">data</td>
 				<td style="padding: 0; margin: 0;">data</td>
 			</tr>
-			
 		</table>
+
 		<style>
-	#demo table,
-	#demo table td,
-	#demo table th{
-		padding: 0;
-		margin: 0;
-	}
-</style>
+			@CHARSET "UTF-8";
+			#demo table,
+			#demo table td,
+			#demo table th{
+				padding: 0;
+				margin: 0;
+			}
+
+
+    .page-break {
+      page-break-after: always;
+      page-break-inside: avoid;
+      clear:both;
+    }
+    .page-break-before {
+      page-break-before: always;
+      page-break-inside: avoid;
+      clear:both;
+    }
+    #demo{
+      position: absolute; 
+      left: 20px; 
+      top: 50px; 
+      bottom: 0; 
+      overflow: auto; 
+      width: 600px;
+    }
+
+		</style>
 	</div>
 	<button v-on:click="PDFGen">Change Name</button>
 </div>
