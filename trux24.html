@@ -56,14 +56,14 @@
             
             <div class="col-md-6">
 				<div class="row">
-                	<div class="col-md-6">
+                	<div class="col-xs-6">
                     	<div class="trip-right">
                     		<img class="img-responsive" src="images/trip-1.png" alt="">
                             <h3>Need Truck</h3>
                             <a href="#" class="common-btn">Make a Post <i class="fa fa-play"></i></a>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-xs-6">
                     	<div class="trip-right">
                     		<img class="img-responsive" src="images/trip-2.png" alt="">
                             <h3>Lazy Truck?</h3>
@@ -79,14 +79,16 @@
 <section class="app-section">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">&nbsp;</div>
+			<div class="col-md-6 tab-none">&nbsp;</div>
             
             <div class="col-md-6">
 				<div class="appIn">
                 	<h2 class="big-title">Available on<br> google play store</h2>
                     <img src="images/app.png" alt="">
-                    <p>Trucx24 android mobile app available on google play store for free, download the mobile app and start creating post or start bidding.</p>
-                    <a class="common-btn" href="#">Download app <i class="fa fa-play"></i></a>
+                    <div class="appText">
+                        <p>Trucx24 android mobile app available on google play store for free, download the mobile app and start creating post or start bidding.</p>
+                        <a class="common-btn" href="#">Download app <i class="fa fa-play"></i></a>
+                    </div>
                 </div>
 			</div>
 		</div>
@@ -99,23 +101,25 @@
 		<div class="row">
 			<div class="col-md-5">
             	<h2 class="big-title">What services <br>we provide?</h2>
-                <div class="service-left clearfix">
-                	<p>Lorem ipsum dolor sit amet, consecte- tur adipiscing elit, sed do eiusmod tempor incididunt ut labore</p>
-                    <a href="#" class="free-post">Learn More <i class="fa fa-play"></i></a>
+                <div class="service-left">
+                	<div class="clearfix">
+                        <p>Lorem ipsum dolor sit amet, consecte- tur adipiscing elit, sed do eiusmod tempor incididunt ut labore</p>
+                        <a href="#" class="free-post">Learn More <i class="fa fa-play"></i></a>
+                    </div>
                 </div>
             </div>
             
             <div class="col-md-7">
 				<div class="service-right">
                     <div class="row">
-                    	<div class="col-md-6">
+                    	<div class="col-xs-6">
                         	<div class="service-img text-center">
                             	<span>01</span>
                         		<img src="images/service-1.png" alt="">
                                 <h4 class="text-uppercase">Regular Trip</h4>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                         	<div class="service-img text-center">
                             	<span>02</span>
                         		<img src="images/service-2.png" alt="">
@@ -123,14 +127,14 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                         	<div class="service-img text-center">
                             	<span>03</span>
                         		<img src="images/service-3.png" alt="">
                                 <h4 class="text-uppercase">Corporate Trip</h4>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                         	<div class="service-img text-center">
                             	<span>04</span>
                         		<img src="images/service-4.png" alt="">
@@ -269,7 +273,7 @@
 
         </div> 
     </div>
-</section><!-- //End service-section-->
+</section><!-- //End platform-section-->
 
 <style>
 
@@ -385,6 +389,8 @@ a:hover{text-decoration:none;}
 	border-color:#f18231;
 }
 .trip-right img{
+	max-height:165px;
+	margin:0 auto;
 	transition:all 400ms;
 }
 .trip-right:hover img{
@@ -476,6 +482,7 @@ a:hover{text-decoration:none;}
 }
 .service-img img{
 	max-height: 160px;
+	max-width:100%;
 	padding:0;
 	margin:0;
 }
@@ -488,6 +495,7 @@ a:hover{text-decoration:none;}
 }
 .service-img h4{
 	padding:30px 0 20px;
+	margin:0;
 	color:3d3c59;
 	font-size:16px;
 	line-height:22px;
@@ -503,10 +511,10 @@ a:hover{text-decoration:none;}
 	background-color:#d4d4d7;
 }
 .service-right:before{
-	height:50%;
+	height:100%;
 	width:1px;
 	left:50%;
-	top:50%;
+	top:0;
 }
 /*========================*/
 /*=========button=========*/
@@ -562,6 +570,7 @@ a:hover{text-decoration:none;}
 	font-weight:700;
 	position:relative;
 	text-transform:uppercase;
+	transition:all 500ms;
 }
 
 .common-btn{
@@ -603,13 +612,6 @@ a:hover{text-decoration:none;}
 	text-decoration:none;
 	animation-play-state: running;
 }
-
-@media only screen and (max-width: 1400px) {
-.banner-block {
-	max-width:1140px;
-}
-}
-
 .platform-section{
 	padding:0 0 160px;
 	margin:0;
@@ -619,6 +621,7 @@ a:hover{text-decoration:none;}
 	margin:0 0 20px;
 	border:1px solid #e9e9e9;
 	border-radius:30px;
+	transition:all 1s;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
@@ -658,9 +661,193 @@ a:hover{text-decoration:none;}
 	margin:0;
 	font-size:16px;
 	line-height:28px;
-	
 }
-  
+
+@media only screen and (max-width: 1400px) {
+.banner-block {
+	max-width:1170px;
+}
+}
+@media only screen and (max-width: 1199px) {
+.banner-block {
+	max-width:970px;
+}
+.big-title {
+  font-size: 36px;
+  line-height: 46px;
+  padding: 0 0 35px;
+}
+.banner-btns {
+  padding: 50px 0 0;
+}
+.play{
+  padding:0;
+  position:absolute;
+  right:-8px;
+  z-index:1;
+}
+
+.trip-right {
+	margin-top:20px;
+  padding:39px 15px;
+}
+.appIn p {
+  font-size:15px;
+  line-height:25px;
+  padding:21px 0;
+}
+.trip-right h3 {
+  font-size: 26px
+}
+.service-left p {
+  padding: 0 30px 94px 0;
+}
+.platform-section,
+.service-section,
+.post-section,
+.app-section,
+.banner{
+	padding-bottom:130px;
+}
+
+}
+
+@media only screen and (max-width: 991px) {
+	.banner-block {
+	max-width:750px;
+}
+.banner-img {
+	width:auto;
+	margin:0 auto;
+	position: static;
+	max-width:720px;
+}
+.trip-right img{
+	max-height:188px;
+}
+.play {
+	float:right;
+  position: static;
+}
+.app-bg {
+  margin: 0 auto;
+  max-width: 720px;
+  position: static;
+  width: auto;
+  display:block;
+}
+.appIn{padding-bottom:50px; overflow:hidden}
+.service-section .big-title {
+  padding-top: 0;
+}
+.service-section .big-title br{display:none;}
+.service-left {
+  margin: 30px 0 0;
+  padding: 15px 0 30px;
+}
+.service-left p {
+  padding: 0 0 30px;
+}
+.big-title br{display:none;}
+.banner-img{
+	display:none;
+}
+.appIn > img {
+  float: left;
+  padding-right:30px;
+}
+.appText{
+	width:calc(100% - 152px);
+	float:left;
+}
+
+.tab-none{display:none;}
+.platform-section,
+.service-section,
+.post-section,
+.app-section,
+.banner{
+	padding-bottom:80px;
+}
+
+}
+@media only screen and (max-width:767px) {
+	.banner-block {
+  max-width: 100%;
+}
+.banner-img {
+	padding:0 15px;
+  max-width:100%;
+}
+.trip-right {
+	padding-top:50px;
+}
+
+
+.app-bg {
+  max-width: calc(100% - 30px);
+}
+.platform-section,
+.service-section,
+.post-section,
+.app-section,
+.banner{
+	padding-bottom:80px;
+}
+.service-left {
+  margin: 15px 0 0;
+}
+}
+@media only screen and (max-width:479px){
+.play {
+	width:100%;
+	float:none;
+  padding: 20px 0 0;
+  overflow:hidden;
+}
+.big-title {
+  font-size: 28px;
+  line-height: 38px;
+}
+.trip-right {
+  padding:20px 10px;
+}
+.trip-right {
+  border-width: 1px;
+}
+.trip-right h3 {
+  font-size: 18px;
+  line-height:24px;
+}
+.trip-right .common-btn {
+	padding-right:20px;
+	font-size:12px;
+	line-height:20px;
+	font-weight:500;
+}
+.trip-right .common-btn i{
+	animation-name:none;
+	right:5px;
+}
+.appIn > img {
+  float: none;
+  padding-right: 0;
+}
+.appText {
+  float: none;
+  width: auto;
+}
+.accordion-wrap h4 {
+  font-size: 15px;
+  line-height: 22px;
+}
+.accordion-wrap p {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+	
+}  
 
 </style>
 
