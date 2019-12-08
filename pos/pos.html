@@ -132,7 +132,30 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Table</label>
+
+							<select class="form-control">
+								<option v-for="table1 in waiter">{{table1.table}}</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Waiter</label>
+							<select class="form-control">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<!-- Modal footer -->
@@ -193,10 +216,14 @@ new Vue({
 		],
 
 		waiter:[
-			{id:1, name:"Hasan azhari", table:'Table'}
+			{id:1, table:'Table-1', name:"Hasan azhari"},
+			{id:2, table:'Table-2', name:"Oliver Jake"},
+			{id:3, table:'Table-3', name:"Jack Connor"},
+			{id:4, table:'Table-4', name:"Liam John"},
+			{id:5, table:'Table-5', name:"Harry Callum"},
+			{id:6, table:'Table-6', name:"Jacob Robert"},
+			{id:7, table:'Table-7', name:"Jacob Michael"},
 		],
-
-
 	},
 
 	methods:{
@@ -258,6 +285,10 @@ new Vue({
 					value.total = ( value.unit_price * value.qty );
 				}
 			});
+		},
+		kot:function(e){
+			this.table = e;
+
 		},
 
 	},

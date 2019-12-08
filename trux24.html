@@ -36,8 +36,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="banner-img"><img class="img-responsive" src="images/banner.png"></div>
 	</div>
-    <div class="banner-img"><img class="img-responsive" src="images/banner.png"></div>
+    
 </section><!-- //End banner-->
 
 <section class="post-section">
@@ -286,18 +287,19 @@ a:hover{text-decoration:none;}
 .banner{
 	padding: 50px 0 160px;
 	margin: 0;
-	position:relative;
 }
 .banner-img{
-	width:61%;
+	width:48%;
 	position:absolute;
-	right:0;
-	top:65px;
+	right:13%;
+	top:-20px;
+	max-width:885px;
 }
 .banner-block{
 	max-width: 1647px;
 	padding:0;
 	margin: 0 auto;
+	position: relative;
 }
 .big-title{
 	padding:0 0 42px;
@@ -435,11 +437,13 @@ a:hover{text-decoration:none;}
     font-weight:500;
 }
 .app-bg{
-	width:45%;
+	max-height:465px;
+	max-width:890px;
+	width:47%;
 	padding:0;
 	margin:0;
 	position:absolute;
-	left:0;
+	right:calc(50% + 70px);
 	top:0;
 }
 .service-section{
@@ -560,7 +564,6 @@ a:hover{text-decoration:none;}
 	75%  {right:10px;}
 	100% {right:22px;}
 }
-
 .common-btn{
 	padding:0 39px 0 0;
 	margin:0;
@@ -572,7 +575,6 @@ a:hover{text-decoration:none;}
 	text-transform:uppercase;
 	transition:all 500ms;
 }
-
 .common-btn{
 	padding:0 39px 0 0;
 	margin:0;
@@ -667,6 +669,13 @@ a:hover{text-decoration:none;}
 .banner-block {
 	max-width:1170px;
 }
+.banner-img{
+  position:absolute;
+  right:-3%;
+  top:40px;
+  width:65%;
+}
+
 }
 @media only screen and (max-width: 1199px) {
 .banner-block {
