@@ -21,6 +21,31 @@
 		text-align: left; 
 		border-bottom: 1px solid #ddd;
 	}
+	.info{
+		width: 400px;
+		padding: 0;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+	.infoBox{
+		width:50%;
+		float: left;
+	}
+	h6{
+		padding: 0;
+		margin: 0;
+		font-size: 14px;
+		line-height: 24px;
+		text-align: center;
+	}
+	h5{
+		padding: 0;
+		margin: 0;
+		font-size: 18px;
+		line-height: 26px;
+		text-align: center;
+		border-bottom: 2px solid #ddd;
+	}
 </style>
 </head>
 <body>
@@ -163,7 +188,7 @@
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button @click="kot('print')" class="btn btn-success">Print</button>
+					<button @click="kot('print')" class="btn btn-success">Next</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -178,7 +203,18 @@
 
 				<!-- Modal body -->
 				<div class="modal-body" id="demo">
-					<h6>Waiter: {{selected_waiter}}</h6>
+					<div class="info">
+						<h5>Dinelnn</h5>
+					</div>
+					<div class="info">
+						<div class="infoBox">
+							<h6>Waiter: {{selected_waiter}}</h6>
+						</div>
+						<div class="infoBox">
+							<h6>Waiter: {{selected_table}}</h6>
+							<h6>Time: {{time}}</h6>
+						</div>
+					</div>
 					
 					<table class="table2">
 						<tr>
@@ -221,6 +257,8 @@ new Vue({
 		selected_waiter:'',
 
 		modal:'',
+		time:'',
+		date:'',
 
 		main_cat_id:'',
 		cart:[],
@@ -332,13 +370,17 @@ new Vue({
 				}
 			});
 		},
-		kot:function(e){
-			this.table = e;
 
-		},
 
 		kot:function(e){
 			this.modal = e;
+
+			if (this.modal == 'print') {
+				let dateTime = new Date();
+				this.time = dateTime.toLocaleTimeString();
+				this.date = date("Y/m/d");
+				
+			}
 		},
 
 		printKot:function(getSignal){
