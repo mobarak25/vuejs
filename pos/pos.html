@@ -8,6 +8,20 @@
 <link rel="stylesheet" href="css/font-awesome.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/vue.js"></script>
+<script src="js/jquery.js"></script>
+<style>
+	.table2{
+		width: 400px;
+		padding: 0;
+		margin: 0 auto;
+	}
+	.table2 th,
+	.table2 td{
+		padding:8px;
+		text-align: left; 
+		border-bottom: 1px solid #ddd;
+	}
+</style>
 </head>
 <body>
 
@@ -42,7 +56,8 @@
 			    	</a>
 			    </li>
 			    <li class="list-inline-item">
-			    	<a class="text-white" href="#" data-toggle="modal" data-target="#myModal">
+			    	<a class="text-white" href="#"
+			    	@click="kot('kt')" data-toggle="modal" data-target="#myModal">
 			    		<div class="icon"><i class="fa fa-cutlery"></i></div>K.O.T
 			    	</a>
 			    </li>
@@ -52,6 +67,7 @@
 			</ul>
 		</div>
 	</nav>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2">
@@ -80,7 +96,7 @@
 			</div>
 
 			<div class="col-md-3 border-left">
-				<div class="row" id="demo">
+				<div class="row">
 					<table class="table">
 						<thead>
 							<tr>
@@ -115,54 +131,77 @@
 			</div>
 		</div>
 	</div>
-</div>
 
+	<!-- The Modal -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div v-if="modal=='kt'" class="modal-content">
 
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Modal Heading</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
 
-<!-- The Modal -->
-<div class="modal fade" id="myModal">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">Modal Heading</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-
-			<!-- Modal body -->
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Table</label>
-
-							<select class="form-control">
-								<option v-for="table1 in waiter">{{table1.table}}</option>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Selected Table</label>
+							<select class="form-control" v-model="selected_table">
+								<option v-for="tbl in waiter">{{ tbl.table}}</option>
 							</select>
 						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Waiter</label>
-							<select class="form-control">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+						<div class="col-md-6">
+							<label>Selected Waiter</label>
+							<select class="form-control" v-model="selected_waiter">
+								<option v-for="tbl in waiter">{{ tbl.name}}</option>
 							</select>
 						</div>
 					</div>
 				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button @click="kot('print')" class="btn btn-success">Print</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
 			</div>
 
-			<!-- Modal footer -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
+			<div v-else class="modal-content">
 
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Modal Print</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body" id="demo">
+					<h6>Waiter: {{selected_waiter}}</h6>
+					
+					<table class="table2">
+						<tr>
+							<th>SL#</th>
+							<th>Product</th>
+							<th>Qty</th>
+						</tr>
+
+						<tr v-for = "(item, index) in cart">
+							<td>{{ index + 1 }}</td>
+							<td>{{ item.title }}</td>
+							<td>{{ item.qty }}</td>
+						</tr>
+					</table>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button @click="printKot('prontOK')" class="btn btn-success">Print</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
 		</div>
 	</div>
 </div>
@@ -177,6 +216,11 @@ new Vue({
 	data: {
 		search_by_cat:'',
 		search_by_product:'',
+
+		selected_table:'',
+		selected_waiter:'',
+
+		modal:'',
 
 		main_cat_id:'',
 		cart:[],
@@ -216,6 +260,7 @@ new Vue({
 		],
 
 		waiter:[
+<<<<<<< HEAD
 			{id:1, table:'Table-1', name:"Hasan azhari"},
 			{id:2, table:'Table-2', name:"Oliver Jake"},
 			{id:3, table:'Table-3', name:"Jack Connor"},
@@ -223,6 +268,17 @@ new Vue({
 			{id:5, table:'Table-5', name:"Harry Callum"},
 			{id:6, table:'Table-6', name:"Jacob Robert"},
 			{id:7, table:'Table-7', name:"Jacob Michael"},
+=======
+			{id:1, table:'Table 1', name:'Abilene Babe'},
+			{id:2, table:'Table 2', name:'Abilene Babson'},
+			{id:3, table:'Table 3', name:'Acker Bailey'},
+			{id:4, table:'Table 4', name:'Acton Baker'},
+			{id:5, table:'Table 5', name:'Addison Aldrich'},
+			{id:6, table:'Table 6', name:'Addison Aldous'},
+			{id:7, table:'Table 7', name:'Adley Alden'},
+			{id:8, table:'Table 8', name:'Alberta Alden'},
+			{id:9, table:'Table 9', name:'Alcott Alcott'},
+>>>>>>> 03a4819f693f7edf2a9ca69b28eac7d0b53ede8f
 		],
 	},
 
@@ -291,6 +347,26 @@ new Vue({
 
 		},
 
+		kot:function(e){
+			this.modal = e;
+		},
+
+		printKot:function(getSignal){
+
+			if(getSignal=="prontOK"){
+
+				$("#demo").printThis({
+	                debug: false,             
+                    importCSS: false,            
+                    importStyle: true, 
+	            });
+			}
+
+		},
+
+
+
+
 	},
 
 	computed:{
@@ -339,18 +415,23 @@ new Vue({
 				cartTotal += item.total;
 			});
 			return cartTotal;
-		}
-		
-	}
+		},
+	},
+
+	mounted(){
+		this.selected_table=this.waiter[0].table;
+		this.selected_waiter=this.waiter[0].name;
+	},
 	
-})
+});
+
 </script>
 
 
 
 
-<script src="js/jquery.js"></script>
+
 <script src="js/bootstarap.jquery.js"></script>
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.12.2/printThis.min.js"></script>
 </body>
 </html>
