@@ -86,9 +86,19 @@
 			    		<div class="icon"><i class="fa fa-cutlery"></i></div>K.O.T
 			    	</a>
 			    </li>
+			    <li class="list-inline-item">
+			    	<a class="text-white" href="#"
+			    	@click="holdThis('hold order')" data-toggle="modal" data-target="#myModal">
+			    		<div class="icon"><i class="fa fa-hand-paper-o"></i></div>Hold
+			    	</a>
+			    </li>
+			    <li class="list-inline-item">
+			    	<a class="text-white" href="#"
+			    	@click="unhold('unhold order')" data-toggle="modal" data-target="#myModal">
+			    		<div class="icon"><i class="fa fa-hand-rock-o"></i></div>Unhold
+			    	</a>
+			    </li>
 
-			    <li class="list-inline-item"><a class="text-white" href="#">Hold</a></li>
-			    <li class="list-inline-item"><a class="text-white" href="#">Unhold</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -114,7 +124,10 @@
 					<div class="col-md-4" v-for="(filterProduct) in  filterProducts">
 						<a @click.prevent="addCart(filterProduct.id, filterProduct.title, filterProduct.price)" href="#">
 							<img class="img-fluid" :src="filterProduct.img" :alt="filterProduct.title">
-							<span class="title">{{filterProduct.title}}</span>
+							<span class="title">
+								<span class="float-left">{{filterProduct.title}}</span>
+								<span class="float-right">BDT {{filterProduct.price}}</span>
+							</span>
 						</a>
 					</div>
 				</div>
@@ -193,7 +206,7 @@
 				</div>
 			</div>
 
-			<div v-else class="modal-content">
+			<div v-if="modal=='print'" class="modal-content">
 
 				<!-- Modal Header -->
 				<div class="modal-header">
@@ -238,6 +251,27 @@
 				</div>
 
 			</div>
+
+			<div v-if="modal=='hold order'" class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Hold this order</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<input class="form-control" type="text" placeholder="Enter holder name"> 
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button class="btn btn-success">Hold</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
 		</div>
 	</div>
 </div>
@@ -262,6 +296,8 @@ new Vue({
 
 		main_cat_id:'',
 		cart:[],
+		hold:[],
+
 
 		categories:[
 			{id:1, title:'All product'},
@@ -392,7 +428,15 @@ new Vue({
                     importCSS: false,            
                     importStyle: true, 
 	            });
-			}
+	            $('#myModal').modal('hide');
+	            this.cart= [];
+			};
+
+			
+		},
+
+		holdThis:function(value){
+			this.modal = value;
 
 		},
 

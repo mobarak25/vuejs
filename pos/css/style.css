@@ -9,9 +9,10 @@ a:hover{
 	margin: 0 0 15px;
 	color: #000;
 	display: block;
-	font-size: 12px;
+	font-size: 11px;
 	line-height: 16px;
 	font-weight: bold;
+	overflow: hidden;
 	text-transform: uppercase;
 	background-color: #fff200;
 }
