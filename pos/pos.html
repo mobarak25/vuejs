@@ -90,7 +90,7 @@
 			    </li>
 			    <li class="list-inline-item">
 			    	<a class="text-white" href="#"
-			    	@click="kot('kt')" data-toggle="modal" data-target="#myModal">
+			    	@click="holdThis('hold order')" data-toggle="modal" data-target="#myModal">
 			    		<div class="icon"><i class="fa fa-hand-paper-o"></i></div>Hold
 			    	</a>
 			    </li>
@@ -251,6 +251,28 @@
 				</div>
 
 			</div>
+
+			<div v-if="modal=='hold order'" class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Hold this order</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<input id="holder" class="form-control" type="text" placeholder="Enter Hold name">
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button @click="holdNow()" class="btn btn-success">Hold</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+
+
 		</div>
 	</div>
 </div>
@@ -411,8 +433,27 @@ new Vue({
                     importStyle: true, 
 	            });
 			}
+			$('#myModal').modal('hide');
 
 		},
+
+		holdThis:function(value){
+			this.modal = value;
+		},
+
+		holdNow:function(){
+			let name = document.getElementById('holder').value;
+			this.hold.push({
+				holer_name:name,
+				orders:this.cart,
+			});
+			this.cart = [];
+			$('#myModal').modal('hide');
+
+			console.log(this.hold)
+			
+		},
+		
 
 
 
