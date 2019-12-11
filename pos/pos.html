@@ -27,15 +27,17 @@
 		margin: 0 auto;
 		overflow: hidden;
 	}
-	.infoBox{
-		width:50%;
-		float: left;
+	.infoBox {
+	    width: 50%;
+	    border-bottom: 1px solid #ddd;
+	    float: left;
+	    padding: 11px 0;
 	}
 	h6{
 		padding: 0;
 		margin: 0;
 		font-size: 14px;
-		line-height: 24px;
+		line-height: 20px;
 		text-align: center;
 	}
 	h5{
@@ -86,9 +88,19 @@
 			    		<div class="icon"><i class="fa fa-cutlery"></i></div>K.O.T
 			    	</a>
 			    </li>
+			    <li class="list-inline-item">
+			    	<a class="text-white" href="#"
+			    	@click="kot('kt')" data-toggle="modal" data-target="#myModal">
+			    		<div class="icon"><i class="fa fa-hand-paper-o"></i></div>Hold
+			    	</a>
+			    </li>
+			    <li class="list-inline-item">
+			    	<a class="text-white" href="#"
+			    	@click="kot('kt')" data-toggle="modal" data-target="#myModal">
+			    		<div class="icon"><i class="fa fa-hand-rock-o"></i></div>Unhold
+			    	</a>
+			    </li>
 
-			    <li class="list-inline-item"><a class="text-white" href="#">Hold</a></li>
-			    <li class="list-inline-item"><a class="text-white" href="#">Unhold</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -97,7 +109,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="input-group">
-					<input type="text" class="form-control border-0 rounded-0" placeholder="Search category" v-model="search_by_cat">
+					<input type="text" class="form-control rounded-0 mt-2" placeholder="Search category" v-model="search_by_cat">
 				</div>
 
 				<ul class="list-group mt-2">
@@ -107,7 +119,7 @@
 
 			<div class="col-md-7 border-left">
 				<div class="input-group">
-					<input type="text" class="form-control border-0 rounded-0" placeholder="Search by product name" v-model="search_by_product">
+					<input type="text" class="form-control rounded-0 mt-2" placeholder="Search by product name" v-model="search_by_product">
 				</div>
 
 				<div class="row mt-2">
@@ -193,7 +205,7 @@
 				</div>
 			</div>
 
-			<div v-else class="modal-content">
+			<div v-if="modal=='print'" class="modal-content">
 
 				<!-- Modal Header -->
 				<div class="modal-header">
@@ -209,6 +221,7 @@
 					<div class="info">
 						<div class="infoBox">
 							<h6>Waiter: {{selected_waiter}}</h6>
+							<h6>Date: {{date}}</h6>
 						</div>
 						<div class="infoBox">
 							<h6>Waiter: {{selected_table}}</h6>
@@ -262,6 +275,7 @@ new Vue({
 
 		main_cat_id:'',
 		cart:[],
+		hold:[],
 
 		categories:[
 			{id:1, title:'All product'},
@@ -378,7 +392,11 @@ new Vue({
 			if (this.modal == 'print') {
 				let dateTime = new Date();
 				this.time = dateTime.toLocaleTimeString();
-				this.date = date("Y/m/d");
+				this.date = [
+						dateTime.getDate(), 
+						dateTime.getMonth()+1, 
+						dateTime.getFullYear()
+					].join('/');
 				
 			}
 		},
