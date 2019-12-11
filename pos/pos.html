@@ -96,7 +96,7 @@
 			    </li>
 			    <li class="list-inline-item">
 			    	<a class="text-white" href="#"
-			    	@click="kot('kt')" data-toggle="modal" data-target="#myModal">
+			    	@click="unhold('unhold order')" data-toggle="modal" data-target="#myModal">
 			    		<div class="icon"><i class="fa fa-hand-rock-o"></i></div>Unhold
 			    	</a>
 			    </li>
@@ -262,6 +262,26 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 					<input id="holder" class="form-control" type="text" placeholder="Enter Hold name">
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button @click="holdNow()" class="btn btn-success">Hold</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+
+			<div v-if="modal=='unhold order'" class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Hold this order</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					dfdfg
 				</div>
 
 				<!-- Modal footer -->
@@ -449,8 +469,10 @@ new Vue({
 			});
 			this.cart = [];
 			$('#myModal').modal('hide');
+		},
 
-			console.log(this.hold)
+		unhold:function(e){
+			this.modal = e;
 			
 		},
 		
