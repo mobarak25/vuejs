@@ -27,15 +27,17 @@
 		margin: 0 auto;
 		overflow: hidden;
 	}
-	.infoBox{
-		width:50%;
-		float: left;
+	.infoBox {
+	    width: 50%;
+	    border-bottom: 1px solid #ddd;
+	    float: left;
+	    padding: 11px 0;
 	}
 	h6{
 		padding: 0;
 		margin: 0;
 		font-size: 14px;
-		line-height: 24px;
+		line-height: 20px;
 		text-align: center;
 	}
 	h5{
@@ -107,7 +109,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="input-group">
-					<input type="text" class="form-control border-0 rounded-0" placeholder="Search category" v-model="search_by_cat">
+					<input type="text" class="form-control rounded-0 mt-2" placeholder="Search category" v-model="search_by_cat">
 				</div>
 
 				<ul class="list-group mt-2">
@@ -117,7 +119,7 @@
 
 			<div class="col-md-7 border-left">
 				<div class="input-group">
-					<input type="text" class="form-control border-0 rounded-0" placeholder="Search by product name" v-model="search_by_product">
+					<input type="text" class="form-control rounded-0 mt-2" placeholder="Search by product name" v-model="search_by_product">
 				</div>
 
 				<div class="row mt-2">
@@ -174,7 +176,6 @@
 	<div class="modal fade" id="myModal">
 		<div class="modal-dialog modal-dialog-centered">
 			<div v-if="modal=='kt'" class="modal-content">
-
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">Modal Heading</h4>
@@ -207,7 +208,6 @@
 			</div>
 
 			<div v-if="modal=='print'" class="modal-content">
-
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">Modal Print</h4>
@@ -222,6 +222,7 @@
 					<div class="info">
 						<div class="infoBox">
 							<h6>Waiter: {{selected_waiter}}</h6>
+							<h6>Date: {{date}}</h6>
 						</div>
 						<div class="infoBox">
 							<h6>Waiter: {{selected_table}}</h6>
@@ -249,11 +250,9 @@
 					<button @click="printKot('prontOK')" class="btn btn-success">Print</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
-
 			</div>
 
 			<div v-if="modal=='hold order'" class="modal-content">
-
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">Hold this order</h4>
@@ -262,15 +261,33 @@
 
 				<!-- Modal body -->
 				<div class="modal-body">
-					<input class="form-control" type="text" placeholder="Enter holder name"> 
+					<input id="holder" class="form-control" type="text" placeholder="Enter Hold name">
 				</div>
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button class="btn btn-success">Hold</button>
+					<button @click="holdNow()" class="btn btn-success">Hold</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
+			</div>
 
+			<div v-if="modal=='unhold order'" class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Unhold order</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<select class="form-control" v-model="selected_holder">
+						<option v-for="holdname in hold">{{ holdname.holer_name }}</option>
+					</select>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button @click="unholdOrder()" class="btn btn-success">Unhold</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -289,6 +306,7 @@ new Vue({
 
 		selected_table:'',
 		selected_waiter:'',
+		selected_holder:'',
 
 		modal:'',
 		time:'',
@@ -298,7 +316,6 @@ new Vue({
 		cart:[],
 		hold:[],
 
-
 		categories:[
 			{id:1, title:'All product'},
 			{id:2, title:'Mexican'},
@@ -307,7 +324,7 @@ new Vue({
 			{id:5, title:'Porta ac consectetur ac'},
 			{id:6, title:'Vestibulum at eros'}
 		],
-
+		
 		products:[
 
 			{id:1, parent_id:2, img:'images/mexican/1.jpg', price:200, title:'Mexican Pizza 8 Inch'},
@@ -414,7 +431,11 @@ new Vue({
 			if (this.modal == 'print') {
 				let dateTime = new Date();
 				this.time = dateTime.toLocaleTimeString();
-				this.date = date("Y/m/d");
+				this.date = [
+						dateTime.getDate(), 
+						dateTime.getMonth()+1, 
+						dateTime.getFullYear()
+					].join('/');
 				
 			}
 		},
@@ -428,17 +449,48 @@ new Vue({
                     importCSS: false,            
                     importStyle: true, 
 	            });
-	            $('#myModal').modal('hide');
 	            this.cart= [];
 			};
-
 			
+			$('#myModal').modal('hide');
 		},
 
 		holdThis:function(value){
 			this.modal = value;
 
 		},
+
+		holdNow:function(){
+			let name = document.getElementById('holder').value;
+			if(name){
+				this.hold.push({
+					holer_name:name,
+					orders:this.cart,
+				});
+			};
+			this.cart = [];
+			document.getElementById('holder').value = '';
+			$('#myModal').modal('hide');
+		},
+
+		unhold:function(e){
+			this.modal = e;
+			
+		},
+
+		unholdOrder:function(){
+			this.hold.findIndex(value=>{
+				if(value.holer_name == this.selected_holder){
+					this.cart = value.orders;
+				}
+				
+			})
+
+
+			
+			
+		},
+		
 
 
 

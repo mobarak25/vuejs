@@ -16,11 +16,10 @@ a:hover{
 	text-transform: uppercase;
 	background-color: #fff200;
 }
+
 .table thead th{
+	padding:13px 10px;
 	font-size: 12px;
-}
-.table th{
-	padding:9px 10px;
 }
 .table td{
 	padding:15px 10px;

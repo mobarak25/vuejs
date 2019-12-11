@@ -112,36 +112,33 @@
             
             <div class="col-md-7">
 				<div class="service-right">
-                    <div class="row">
-                    	<div class="col-xs-6">
-                        	<div class="service-img text-center">
-                            	<span>01</span>
-                        		<img src="images/service-1.png" alt="">
-                                <h4 class="text-uppercase">Regular Trip</h4>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                        	<div class="service-img text-center">
-                            	<span>02</span>
-                        		<img src="images/service-2.png" alt="">
-                                <h4 class="text-uppercase">Return Trip</h4>
-                            </div>
-                        </div>
-                        
-                        <div class="col-xs-6">
-                        	<div class="service-img text-center">
-                            	<span>03</span>
-                        		<img src="images/service-3.png" alt="">
-                                <h4 class="text-uppercase">Corporate Trip</h4>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                        	<div class="service-img text-center">
-                            	<span>04</span>
-                        		<img src="images/service-4.png" alt="">
-                                <h4 class="text-uppercase">Labor Service</h4>
-                            </div>
-                        </div>
+                    <div class="service-img text-center">
+                    	<a href="#">
+                            <span>01</span>
+                            <img src="images/service-1.png" alt="">
+                            <h4 class="text-uppercase">Regular Trip</h4>
+                        </a>
+                    </div>
+                    <div class="service-img text-center">
+                    	<a href="#">
+                            <span>02</span>
+                            <img src="images/service-2.png" alt="">
+                            <h4 class="text-uppercase">Return Trip</h4>
+                        </a>
+                    </div>
+                    <div class="service-img text-center">
+                    	<a href="#">
+                            <span>03</span>
+                            <img src="images/service-3.png" alt="">
+                            <h4 class="text-uppercase">Corporate Trip</h4>
+                        </a>
+                    </div>
+                    <div class="service-img text-center">
+                    	<a href="#">
+                            <span>04</span>
+                            <img src="images/service-4.png" alt="">
+                            <h4 class="text-uppercase">Labor Service</h4>
+                        </a>
                     </div>
                 </div>
 			</div>
@@ -281,7 +278,7 @@
         <div class="row">
             <div class="col-md-7 ftr-padding">
             	<div class="row">
-                	<div class="col-md-5">
+                	<div class="col-sm-6 col-md-5">
                     	<div class="ft-box">
                             <h3 class="ft-title">Contact US</h3>
                             <address>MF Tower, Plot : GA - 95/C, Progoti Sarani, Gulshan-1 Link Road, Dhaka-1212 </address>
@@ -289,7 +286,7 @@
                             <strong class="ft-contact">Phone:<span> +88 09638 242424 </span></strong>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-sm-6 col-md-3">
                     	<div class="ft-box">
                             <h3 class="ft-title">Company</h3>
                             <ul>
@@ -300,7 +297,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-12 col-md-4 mb-dsn">
                     	<div class="ft-box">
                             <h3 class="ft-title">Discover</h3>
                             <ul>
@@ -364,7 +361,7 @@ body{
 	font-family: 'Poppins', sans-serif;
 }
 a:focus,
-a:hover{text-decoration:none;}
+a:hover{text-decoration:none; color:#48486b;}
 .banner{
 	padding: 50px 0 160px;
 	margin: 0;
@@ -425,7 +422,7 @@ a:hover{text-decoration:none;}
 	border-radius:50%; 
 }
 .play i{
-	margin: auto;
+	margin: auto 19px;
 	font-size:22px;
 	transition: all 400ms;
 }
@@ -556,17 +553,44 @@ a:hover{text-decoration:none;}
 	font-weight:500;
 }
 .service-right{
+	width:auto;
 	padding:0;
 	margin:0;
+	overflow:hidden;
 	position:relative;
 	background-color:#f2f2f2;
 }
+.service-right .col-xs-6{
+	padding:0;
+}
 .service-img{
-	padding:24px 0 0;
+	width:50%;
+	padding:0;
 	margin:0;
+	float:left;
+	box-sizing:border-box;
+}
+.service-img a{
+	padding:24px 0 0;
+	display:block;
+}
+.service-img:hover a{
+	background-color:#feece0;
+}
+.service-img:nth-child(2n){
+	border-left:1px solid #ddd;
+}
+.service-right:after{
+	content:'';
+	width:100%;
+	height:1px;
+	background-color:#ddd;
+	position:absolute;
+	left:0;
+	top:50%;
 }
 .service-img img{
-	max-height: 160px;
+	max-height: 155px;
 	max-width:100%;
 	padding:0;
 	margin:0;
@@ -585,22 +609,7 @@ a:hover{text-decoration:none;}
 	font-size:16px;
 	line-height:22px;
 }
-.service-right:after,
-.service-right:before{
-	content:'';
-	height:1px;
-	width:100%;
-	position:absolute;
-	left:0;
-	top:50%;
-	background-color:#d4d4d7;
-}
-.service-right:before{
-	height:100%;
-	width:1px;
-	left:50%;
-	top:0;
-}
+
 /*========================*/
 /*=========button=========*/
 /*========================*/
@@ -921,7 +930,12 @@ a:hover{text-decoration:none;}
 	font-weight:500;
 	border-radius:4px;
 	float:right;
+	transition:all 500ms;
 	background-color:#fff;
+}
+.carrier:hover{
+	color:#fff;
+	background-color:#3d3c59;
 }
 .ftr-social{
 	width:auto;
@@ -1008,6 +1022,37 @@ a:hover{text-decoration:none;}
 .banner{
 	padding-bottom:130px;
 }
+.ft-title {
+  font-size: 16px;
+  line-height: 26px;
+}
+.ft-box address,
+.ft-contact,
+.ft-box ul li {
+  font-size: 14px;
+  line-height: 24px;
+}
+.ft-box ul li a:hover {
+  padding-left:3px;
+}
+.ftr-badge strong {
+	width:50%;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 0 0 0 20px;
+}
+.carrier {
+  font-size: 14px;
+  line-height: 22px;
+  padding: 12px 22px;
+}
+.ftr-padding {
+  padding-top: 45px;
+}
+.ftr-cover {
+  height: 175px;
+}
+
 
 }
 
@@ -1068,7 +1113,42 @@ a:hover{text-decoration:none;}
 .banner{
 	padding-bottom:80px;
 }
-
+.ftr-cover {
+  display:none;
+}
+.mb-dsn .ft-box{
+	width:50%;
+	float:left;
+	padding:20px 0;
+	border-top:1px solid #ddd;
+}
+.mb-dsn .ft-box:last-child{
+	padding-left:15px;
+}
+.ftr-badge {
+  border-top: 1px solid #ddd;
+  color: #3d3c59;
+  padding-top:20px;
+}
+.ftr-badge strong {
+	padding:12px 0 0;
+  font-size: 16px;
+  line-height: 24px;
+  width:calc(100% - 175px);
+}
+.carrier{background-color:#3d3c59;color:#fff;}
+.carrier:hover{background-color:#f0822f;}
+.ftr-social{padding:30px 0 0}
+.ftr-copy {
+  border-top: 1px solid #ddd;
+  margin: 20px 0 0;
+  padding: 20px 0 0;
+  text-align: right;
+}
+.t-footer {
+	padding: 35px 0 30px;
+	background-position:center -30px;
+}
 }
 @media only screen and (max-width:767px) {
 	.banner-block {
@@ -1096,56 +1176,90 @@ a:hover{text-decoration:none;}
 .service-left {
   margin: 15px 0 0;
 }
+.ftr-padding .col-sm-6{
+	float:left;
+	width:50%;
+}
+.mb-dsn {
+  float: left;
+  width: 100%;
+}
 }
 @media only screen and (max-width:479px){
-.play {
-	width:100%;
-	float:none;
-  padding: 20px 0 0;
-  overflow:hidden;
-}
-.big-title {
-  font-size: 28px;
-  line-height: 38px;
-}
-.trip-right {
-  padding:20px 10px;
-}
-.trip-right {
-  border-width: 1px;
-}
-.trip-right h3 {
-  font-size: 18px;
-  line-height:24px;
-}
-.trip-right .common-btn {
-	padding-right:20px;
-	font-size:12px;
-	line-height:20px;
-	font-weight:500;
-}
-.trip-right .common-btn i{
-	animation-name:none;
-	right:5px;
-}
-.appIn > img {
-  float: none;
-  padding-right: 0;
-}
-.appText {
-  float: none;
-  width: auto;
-}
-.accordion-wrap h4 {
-  font-size: 15px;
-  line-height: 22px;
-}
-.accordion-wrap p {
-  font-size: 14px;
-  line-height: 24px;
-}
-
-	
+	.play {
+		width:100%;
+		float:none;
+		padding: 20px 0 0;
+		overflow:hidden;
+	}
+	.big-title {
+		font-size: 28px;
+		line-height: 38px;
+	}
+	.trip-right {
+		padding:20px 10px;
+	}
+	.trip-right {
+		border-width: 1px;
+	}
+	.trip-right h3 {
+		font-size: 18px;
+		line-height:24px;
+	}
+	.trip-right .common-btn {
+		padding-right:20px;
+		font-size:12px;
+		line-height:20px;
+		font-weight:500;
+	}
+	.trip-right .common-btn i{
+		animation-name:none;
+		right:5px;
+	}
+	.appIn > img {
+		float: none;
+		padding-right: 0;
+	}
+	.appText {
+		float: none;
+		width: auto;
+	}
+	.accordion-wrap h4 {
+		font-size: 15px;
+		line-height: 22px;
+	}
+	.accordion-wrap p {
+		font-size: 14px;
+		line-height: 24px;
+	}
+	.ft-box {
+		border-bottom: 1px solid #ddd;
+		padding:15px 0;
+	}
+	.mb-dsn,
+	.ftr-padding .col-sm-6 {
+		float: none;
+		width: auto;
+	}
+	.mb-dsn .ft-box {
+		float: none;
+		padding: 15px 0;
+		width: auto;
+		border-top:0;
+	}
+	.mb-dsn .ft-box:last-child {padding-left: 0;}
+	.ftr-badge strong {padding: 0;}
+	.ftr-badge {border-top: 0;}
+	.carrier {
+		font-size: 11px;
+		padding: 5px 10px;
+	}
+	.ftr-badge strong {width: calc(100% - 120px)}
+	.t-footer {
+		background-position: center -44px;
+		padding: 22px 0 30px;
+	}
+	.ftr-padding {padding-top: 15px;}	
 }  
 
 </style>
