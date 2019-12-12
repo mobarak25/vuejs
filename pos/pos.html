@@ -467,10 +467,13 @@ new Vue({
 					holer_name:name,
 					orders:this.cart,
 				});
+
+				document.getElementById('holder').value = '';
+				$('#myModal').modal('hide');
+				this.cart = [];
 			};
-			this.cart = [];
-			document.getElementById('holder').value = '';
-			$('#myModal').modal('hide');
+			
+			
 		},
 
 		unhold:function(e){
@@ -479,16 +482,10 @@ new Vue({
 		},
 
 		unholdOrder:function(){
-			this.hold.findIndex(value=>{
-				if(value.holer_name == this.selected_holder){
-					this.cart = value.orders;
-				}
-				
-			})
+			let findArry = this.hold.splice(this.hold.indexOf(this.selected_holder));
 
-
-			
-			
+			this.cart = findArry[0].orders;
+			$('#myModal').modal('hide');
 		},
 		
 
