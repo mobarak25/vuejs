@@ -61,15 +61,10 @@
 			
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link disabled" href="#">Disabled</a>
+					<a class="nav-link" href="#">Home</a>
 				</li>
 			</ul>
+
 			<ul class="list-inline m-0 rgtMenu">
 
 			    <li class="list-inline-item">
@@ -303,10 +298,12 @@ new Vue({
 	data: {
 		search_by_cat:'',
 		search_by_product:'',
+		selected_category:'',
 
 		selected_table:'',
 		selected_waiter:'',
 		selected_holder:'',
+
 
 		modal:'',
 		time:'',
@@ -366,7 +363,7 @@ new Vue({
 	methods:{
 		/* #### This function for filter PRODUCT by clicking #### */
 		filterByCat:function(id){
-			id !== 1 ? (this.main_cat_id = id):(this.main_cat_id=''); 
+			id !== 1 ? (this.main_cat_id = id):(this.main_cat_id='');
 		},
 
 		/* #### This function for add product in CART #### */
@@ -436,7 +433,6 @@ new Vue({
 						dateTime.getMonth()+1, 
 						dateTime.getFullYear()
 					].join('/');
-				
 			}
 		},
 
@@ -449,7 +445,7 @@ new Vue({
                     importCSS: false,            
                     importStyle: true, 
 	            });
-	            this.cart= [];
+	            
 			};
 			
 			$('#myModal').modal('hide');
@@ -471,6 +467,7 @@ new Vue({
 				document.getElementById('holder').value = '';
 				$('#myModal').modal('hide');
 				this.cart = [];
+				this.selected_holder = this.hold[0].holer_name;
 			};
 			
 			
@@ -482,7 +479,7 @@ new Vue({
 		},
 
 		unholdOrder:function(){
-			let findArry = this.hold.splice(this.hold.indexOf(this.selected_holder));
+			let findArry = this.hold.splice(this.hold.indexOf(this.selected_holder), 1);
 
 			this.cart = findArry[0].orders;
 			$('#myModal').modal('hide');
