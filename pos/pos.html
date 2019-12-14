@@ -242,7 +242,7 @@
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button @click="printKot('prontOK')" class="btn btn-success">Print</button>
+					<button @click="printKot('prontOK',dis)" class="btn btn-success">Print</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -436,19 +436,26 @@ new Vue({
 			}
 		},
 
-		printKot:function(getSignal){
+		printKot:function(getSignal,callback){
 
 			if(getSignal=="prontOK"){
 
 				$("#demo").printThis({
 	                debug: false,             
                     importCSS: false,            
-                    importStyle: true, 
+                    importStyle: true,
 	            });
 	            
 			};
-			
 			$('#myModal').modal('hide');
+			
+
+		},
+
+		dis:function (b){
+			if(b == "prontOK"){
+				this.cart = [];
+			}
 		},
 
 		holdThis:function(value){
