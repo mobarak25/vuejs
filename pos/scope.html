@@ -12,21 +12,25 @@
 <body>
 
 <script>
-    var arrs =[
-        {name:'ali', age:30},
-        {name:'ali', age:30},
-        {name:'ali', age:30},
-        {name:'ali', age:30},
-        {name:'ali', age:30}
-    ];
 
-    arrs.forEach( element=> {
-         console.log(element.name)
-     });
+	//global scope;
 
-     for(arr in arrs){
-        console.log(arr)
-     } 
+   function foo(){
+   	//function scope Or local scope
+
+    if(true){
+        var fruit1 = 'apple';        //exist in function scope
+        let fruit2 = 'banana';     //exist in block scope
+        let fruit3 = 'strawberry';   //exist in block scope
+
+        console.log(fruit1)//also here same reruls
+
+        console.log(fruit2) //only here asscessable
+    }
+     console.log(fruit1) //also here same reruls
+}
+
+foo();
 </script>
 
 

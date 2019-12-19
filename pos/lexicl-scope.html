@@ -12,21 +12,32 @@
 <body>
 
 <script>
-    var arrs =[
-        {name:'ali', age:30},
-        {name:'ali', age:30},
-        {name:'ali', age:30},
-        {name:'ali', age:30},
-        {name:'ali', age:30}
-    ];
 
-    arrs.forEach( element=> {
-         console.log(element.name)
-     });
+function foo1(){
+    var fruit1 = 'apple';        
+    const fruit2 = 'banana';     
+    let fruit3 = 'strawberry';
 
-     for(arr in arrs){
-        console.log(arr)
-     } 
+    function foo2(){
+
+    	var fruit4 = "mango";
+
+       /* console.log(fruit1);
+        console.log(fruit2);
+        console.log(fruit3);*/
+
+        console.log(fruit4)
+    }
+    foo2();
+}
+
+foo1();
+
+//result:
+//apple
+//banana
+//strawberry
+
 </script>
 
 
