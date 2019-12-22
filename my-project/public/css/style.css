@@ -1,0 +1,113 @@
+body{
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 400;
+	font-family:'Poppins', sans-serif;
+	background-color: #f0f0f0;
+}
+.logo{
+	width: 100px;
+	padding: 0;
+	margin: 0;
+}
+/*==========================*/
+/*==========Header==========*/
+/*==========================*/
+.header{
+	padding: 0;
+	margin: 0;
+	background-color: #003048;
+}
+.header .navbar{
+	padding: 0 15px; 
+	margin: 0;
+}
+.header .navbar li{
+	padding: 0;
+	margin: 0;
+	font-size:16px;
+	line-height: 26px;
+	font-weight: 500;
+}
+.header .navbar li a{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin: 0;
+	color: #fff;
+}
+.header .navbar li a.router-link-exact-active{
+	color: #fff200;
+}
+.header .dropdown-menu{
+	background-color: #003048;
+}
+.header .navbar .dropdown-item{
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.header .navbar .dropdown-item:not(:last-child){
+	border-bottom: 1px solid #fff;
+}
+.header .dropdown-item:focus, 
+.dropdown-item:hover {
+    background-color: #003048;
+    text-decoration: none;
+}
+/*==========================*/
+/*==========Sidebar=========*/
+/*==========================*/
+.sidebar{
+	height: 100%;
+	padding:100px 15px;
+	margin: 0;
+	background-color: #495057;
+}
+.site-content{
+	padding: 0;
+	margin: 0;
+}
+.sidebar-cont{
+	padding: 0;
+	margin: 0;
+}
+.sidebar-cont ul{
+	padding: 0;
+	margin: 0;
+}
+.sidebar-cont ul li{
+	padding: 0;
+	margin: 0;
+}
+.sidebar-cont ul li a{
+	padding:7px;
+	margin: 0 0 5px;
+	color: #fff;
+	display: block;
+	border: 1px solid #fff;
+	background-color: #343a40;
+}
+.sidebar-cont ul li a:hover{
+	text-decoration: none;
+}
+/*==========================*/
+/*============Home==========*/
+/*==========================*/
+.home{
+	padding: 0;
+	margin: 0;
+}
+
+/*==========================*/
+/*==========Footer==========*/
+/*==========================*/
+.footer{
+	padding:15px;
+	margin: 0;
+	color: #fff;
+	font-size:14px;
+	line-height:20px;
+	text-align: center;
+	background-color:#003048 ;
+}

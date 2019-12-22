@@ -1,32 +1,44 @@
 <template>
-    <div>
+    <div class="">
         <Header />
-        <router-view/>
+        <section class="site-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-2 pl-0">
+                        <div class="sidebar">
+                            <Sidebar />
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="home">
+                            <router-view/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+        
+        <Footer />
     </div>
 </template>
 
 <script>
     import Header from '@/components/Header.vue'
+    import Footer from '@/components/Footer.vue'
+    import Sidebar from '@/components/Sidebar.vue'
 
     export default {
-        name: 'home',
+        name: '',
         components: {
-            Header
+            Header,
+            Footer,
+            Sidebar
         }
     }
 </script>
 
 <style>
-
-body{
-    padding: 0;
-    margin: 0;
-    color: #2c3e50;
-    text-align: center;
-    font-family:'Avenir', Helvetica, Arial, sans-serif;
-}
-#nav a.router-link-exact-active {
-color: #42b983;
-}
 
 </style>
